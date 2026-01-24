@@ -1,37 +1,38 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Phone, ArrowRight } from 'lucide-react';
+import PageHeader from '../components/PageHeader';
+import { Phone, CheckCircle } from 'lucide-react';
 
 const Transfer = () => {
     return (
-        <div className="page-content">
+        <div className="page-wrapper">
             <Helmet>
                 <title>Transfer & Refill Prescriptions | Corner Pharmacy Flora</title>
                 <meta name="description" content="Easily transfer your prescriptions to Corner Pharmacy. We handle the calls for you. Fast refills and free local delivery available." />
             </Helmet>
-            <section className="section bg-light">
-                <div className="container text-center">
-                    <h1 className="section-title">Transfer or Refill Your Prescription</h1>
-                    <p className="page-subtitle" style={{ maxWidth: '600px', margin: '0 auto 32px' }}>
-                        Moving your prescriptions to Corner Pharmacy is easy. We handle the paperwork for you.
-                    </p>
 
-                    <div className="card" style={{ maxWidth: '500px', margin: '0 auto', padding: '32px' }}>
-                        <h2 style={{ marginBottom: '24px', color: 'var(--color-primary)' }}>How to Transfer</h2>
+            <PageHeader
+                title="Switch to Corner Pharmacy"
+                subtitle="You deserve a pharmacist who knows your name. We make transferring easy."
+            />
 
-                        <div className="steps" style={{ textAlign: 'left', marginBottom: '32px' }}>
-                            <div style={{ marginBottom: '16px' }}><strong>1. Call or Visit Us</strong> <br />Give us a call or stop by with your bottle.</div>
-                            <div style={{ marginBottom: '16px' }}><strong>2. We Contact Your Old Pharmacy</strong> <br />We'll get your info from the big chain.</div>
-                            <div><strong>3. We Fill It Fast</strong> <br />Usually ready in 15 minutes or less.</div>
-                        </div>
+            <section className="section" style={{ paddingTop: 0 }}>
+                <div className="container">
+                    <div className="bento-card bento-wide" style={{ maxWidth: '800px', margin: '0 auto', background: '#022c22', color: 'white' }}>
+                        <div className="bento-content text-center">
+                            <h2 style={{ color: 'white', fontSize: '2.5rem', marginBottom: '24px' }}>Ready to make the switch?</h2>
+                            <p style={{ marginBottom: '32px', fontSize: '1.2rem', opacity: 0.9 }}>
+                                Just give us your old pharmacy's information, and we'll handle the entire transfer process for you. No phone calls required on your end.
+                            </p>
 
-                        <div className="transfer-actions" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                            <a href="tel:6016652299" className="btn btn-primary">
-                                <Phone size={18} style={{ marginRight: '8px' }} /> Call to Transfer
+                            <div className="flex-center" style={{ display: 'flex', gap: '24px', justifyContent: 'center', marginBottom: '40px' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><CheckCircle size={18} color="#d4af37" /> We call your doctor</div>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><CheckCircle size={18} color="#d4af37" /> We handle insurance</div>
+                            </div>
+
+                            <a href="tel:6016652299" className="btn-gold" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center' }}>
+                                <Phone size={18} style={{ marginRight: '8px' }} /> Call (601) 665-2299
                             </a>
-                            <button className="btn btn-secondary">
-                                Refill Prescription
-                            </button>
                         </div>
                     </div>
                 </div>

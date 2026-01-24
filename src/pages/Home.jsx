@@ -16,73 +16,24 @@ const Home = () => {
 
             <BentoGrid />
 
-            {/* Section 4: Delivery Highlight */}
-            <section className="section bg-primary-soft">
-                <div className="container delivery-highlight">
-                    <div className="delivery-icon">
-                        <Truck size={48} color="#1B5E20" />
-                    </div>
-                    <div className="delivery-content">
-                        <h2 className="section-title" style={{ marginBottom: '16px' }}>Free Prescription Delivery in Flora</h2>
-                        <p className="delivery-text">Don't feel like getting out? We'll bring your medications directly to your doorstep at no extra cost.</p>
-                        <div className="delivery-actions">
-                            <button className="btn btn-primary">Request Delivery Info</button>
-                            <button className="btn btn-secondary">Call to Arrange</button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Section 5: Vaccines */}
-            <section className="section">
-                <div className="container text-center">
-                    <h2 className="section-title">Vaccines Available</h2>
-                    <div className="vaccine-badges">
-                        <span className="vaccine-badge">Flu</span>
-                        <span className="vaccine-badge">Shingles</span>
-                        <span className="vaccine-badge">Pneumonia</span>
-                        <span className="vaccine-badge">Tdap</span>
-                    </div>
-                    <button className="btn btn-primary" style={{ marginTop: '24px' }}>Call to Schedule</button>
-                </div>
-            </section>
-
-            {/* Section 6: Market */}
-            <section className="section bg-light">
-                <div className="container market-section">
-                    <div className="market-text">
-                        <h2 className="section-title">More Than a Pharmacy — It’s a Corner Market Too</h2>
-                        <ul className="market-list">
-                            <li>Gifts & greeting cards</li>
-                            <li>Health & wellness items</li>
-                            <li>Convenient local essentials</li>
-                        </ul>
-                        <button className="btn btn-primary" style={{ marginTop: '24px' }}>Explore The Market</button>
-                    </div>
-                </div>
-            </section>
-
-            {/* Section 7: Local Trust */}
-            <section className="section">
-                <div className="container text-center" style={{ maxWidth: '800px' }}>
-                    <h2 className="section-title">Local Service You Can Count On</h2>
-                    <p style={{ fontSize: '1.1rem', lineHeight: '1.8' }}>
-                        Corner Pharmacy & Market is proud to serve Flora. We believe in knowing our neighbors by name and taking the time to answer your questions.
+            {/* Brand Statement / Trust Section */}
+            <section className="section" style={{ padding: '100px 0' }}>
+                <div className="container text-center" style={{ maxWidth: '900px' }}>
+                    <h2 className="section-title" style={{ fontSize: '3rem', marginBottom: '32px' }}>
+                        "The pharmacy of the future is actually <br />
+                        <span style={{ color: 'var(--color-accent)', fontFamily: 'var(--font-serif)', fontStyle: 'italic' }}>the pharmacy of the past.</span>"
+                    </h2>
+                    <p style={{ fontSize: '1.25rem', color: 'var(--color-text-muted)', lineHeight: '1.8' }}>
+                        We believe technology should make us <em>more</em> human, not less.
+                        That's why we use modern tools to give us more time to do what matters:
+                        talking to you.
                     </p>
-                </div>
-            </section>
-
-            {/* Section 8: Contact */}
-            <section className="section bg-dark text-white">
-                <div className="container">
-                    <h2 className="section-title text-center" style={{ color: '#fff' }}>Visit Us in Flora, MS</h2>
-                    <div className="contact-info text-center">
-                        <p className="address">4835 Main St, Flora, MS 39071</p>
-                        <p className="phone" style={{ fontSize: '1.5rem', fontWeight: 'bold', margin: '16px 0' }}>(601) 665-2299</p>
-                        <div className="contact-actions">
-                            <button className="btn-dark">Get Directions</button>
-                            <a href="tel:6016652299" className="btn-gold" style={{ marginLeft: '16px' }}>Call Now</a>
-                        </div>
+                    <div style={{ marginTop: '48px' }}>
+                        <img
+                            src="https://images.unsplash.com/photo-1576602976047-174e57a47881?auto=format&fit=crop&w=1200&q=80"
+                            alt="Pharmacist consulting patient"
+                            style={{ borderRadius: '24px', opacity: 0.8, boxShadow: 'var(--shadow-soft)' }}
+                        />
                     </div>
                 </div>
             </section>

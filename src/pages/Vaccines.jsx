@@ -1,26 +1,29 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import PageHeader from '../components/PageHeader';
 
 const Vaccines = () => {
     return (
-        <div className="page-content">
+        <div className="page-wrapper">
             <Helmet>
                 <title>Vaccines & Immunizations | Corner Pharmacy Flora</title>
                 <meta name="description" content="Flu, Shingles, Pneumonia, and Tdap vaccines available in Flora, MS. Walk-ins welcome for most immunizations." />
             </Helmet>
-            <section className="section">
+
+            <PageHeader
+                title="Vaccines & Immunizations"
+                subtitle="Protect yourself and your family. Walk-ins available for most vaccines."
+            />
+
+            <section className="section" style={{ paddingTop: 0 }}>
                 <div className="container text-center">
-                    <h1 className="section-title">Immunizations & Vaccines</h1>
-                    <p>Walk-ins welcome for most vaccines. Call ahead for Shingles.</p>
-                    <div className="card" style={{ padding: '24px', maxWidth: '600px', margin: '24px auto' }}>
-                        <ul style={{ textAlign: 'left', listStyle: 'disc', paddingLeft: '20px' }}>
-                            <li>Seasonal Flu</li>
-                            <li>Shingles (Shingrix)</li>
-                            <li>Pneumonia</li>
-                            <li>Tdap (Tetanus, Diphtheria, Pertussis)</li>
-                        </ul>
+                    <div className="bento-grid" style={{ maxWidth: '800px', margin: '0 auto', gridTemplateColumns: '1fr 1fr' }}>
+                        <div className="bento-card" style={{ gridColumn: 'span 1' }}><h3>Flu Shots</h3><p>Seasonal</p></div>
+                        <div className="bento-card" style={{ gridColumn: 'span 1' }}><h3>Shingles</h3><p>Shingrix</p></div>
+                        <div className="bento-card" style={{ gridColumn: 'span 1' }}><h3>Pneumonia</h3><p>Prevnar 20</p></div>
+                        <div className="bento-card" style={{ gridColumn: 'span 1' }}><h3>Tdap</h3><p>Tetanus</p></div>
                     </div>
-                    <button className="btn btn-primary">Call to Schedule</button>
+                    <button className="btn-gold" style={{ marginTop: '48px' }}>Call to Schedule</button>
                 </div>
             </section>
         </div>

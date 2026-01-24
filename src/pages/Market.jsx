@@ -1,27 +1,32 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import PageHeader from '../components/PageHeader';
 
 const Market = () => {
     return (
-        <div className="page-content">
+        <div className="page-wrapper">
             <Helmet>
                 <title>The Market | Corner Pharmacy Flora</title>
                 <meta name="description" content="Explore our corner market for gifts, greeting cards, health essentials, and local goods in Flora, MS. More than just a pharmacy." />
             </Helmet>
-            <section className="section">
-                <div className="container text-center">
-                    <h1 className="section-title">The Corner Market</h1>
-                    <p>More than just a pharmacy. Come see our curated selection of local goods.</p>
 
-                    <div className="market-grid" style={{
-                        display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-                        gap: '24px',
-                        marginTop: '32px'
-                    }}>
-                        <div className="card" style={{ padding: '24px' }}><h3>Gifts & Cards</h3><p>For every occasion.</p></div>
-                        <div className="card" style={{ padding: '24px' }}><h3>Local Honey</h3><p>From local beekeepers.</p></div>
-                        <div className="card" style={{ padding: '24px' }}><h3>Essentials</h3><p>Milk, bread, and OTC meds.</p></div>
+            <PageHeader
+                title="The Market"
+                subtitle="More than just a pharmacy. A curated collection of local goods, gifts, and essentials."
+            />
+
+            <section className="section" style={{ paddingTop: 0 }}>
+                <div className="container">
+                    <div className="bento-grid" style={{ maxWidth: '1000px', margin: '0 auto', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
+                        <div className="bento-card" style={{ height: '300px', background: 'linear-gradient(to bottom right, #f8fafc, #e2e8f0)' }}>
+                            <h3>Gifts & Cards</h3>
+                        </div>
+                        <div className="bento-card" style={{ height: '300px', background: 'linear-gradient(to bottom right, #f0fdf4, #dcfce7)' }}>
+                            <h3>Local Honey & Jams</h3>
+                        </div>
+                        <div className="bento-card" style={{ height: '300px', background: 'linear-gradient(to bottom right, #fff7ed, #ffedd5)' }}>
+                            <h3>Vitamins & Wellness</h3>
+                        </div>
                     </div>
                 </div>
             </section>
