@@ -1,9 +1,8 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import Hero from '../components/Hero';
-import { ActionCard, IconBox } from '../components/Cards';
-import StickyMobileBar from '../components/StickyMobileBar';
-import { Pill, RefreshCw, Truck, Heart, Clock, MapPin } from 'lucide-react';
+import HeroV2 from '../components/HeroV2';
+import BentoGrid from '../components/BentoGrid';
+import { Truck, Heart, Clock, MapPin } from 'lucide-react';
 import '../styles/Home.css';
 
 const Home = () => {
@@ -13,50 +12,9 @@ const Home = () => {
                 <title>Corner Pharmacy & Market | Flora, MS</title>
                 <meta name="description" content="Your trusted local independent pharmacy in Flora, MS. Fast prescriptions, free delivery, vaccines, and a friendly market. Locally owned and operated." />
             </Helmet>
-            <Hero />
+            <HeroV2 />
 
-            {/* Section 1: Quick Actions */}
-            <section className="section section-quick-actions">
-                <div className="container">
-                    <h2 className="section-title text-center">What Can We Help You With Today?</h2>
-                    <div className="quick-actions-grid">
-                        <ActionCard title="Transfer Prescription" icon={Pill} />
-                        <ActionCard title="Refill Prescription" icon={RefreshCw} />
-                        <ActionCard title="Delivery & Curbside" icon={Truck} />
-                    </div>
-                </div>
-            </section>
-
-            {/* Section 2: Why Choose Us */}
-            <section className="section bg-light">
-                <div className="container">
-                    <h2 className="section-title text-center">Why Flora Chooses Corner Pharmacy</h2>
-                    <div className="features-grid">
-                        <IconBox title="Personal Local Care" icon={Heart} description="We treat you like family, not a number." />
-                        <IconBox title="Fast Reliable Service" icon={Clock} description="Prescriptions filled in minutes, not hours." />
-                        <IconBox title="Free Local Delivery" icon={Truck} description="We bring your meds right to your door." />
-                        <IconBox title="Curbside Pickup" icon={MapPin} description="Stay in your car, we'll run it out to you." />
-                    </div>
-                </div>
-            </section>
-
-            {/* Section 3: Services Preview */}
-            <section className="section">
-                <div className="container">
-                    <h2 className="section-title text-center">Pharmacy Services</h2>
-                    <div className="services-list-grid">
-                        {['Prescription Filling', 'Prescription Transfers', 'Medication Counseling', 'Over-the-Counter Products', 'Immunizations / Vaccines', 'Medication Support'].map(service => (
-                            <div key={service} className="service-item">
-                                <div className="service-dot"></div>
-                                {service}
-                            </div>
-                        ))}
-                    </div>
-                    <div className="text-center" style={{ marginTop: '32px' }}>
-                        <button className="btn btn-secondary">View All Services</button>
-                    </div>
-                </div>
-            </section>
+            <BentoGrid />
 
             {/* Section 4: Delivery Highlight */}
             <section className="section bg-primary-soft">
@@ -122,14 +80,12 @@ const Home = () => {
                         <p className="address">4835 Main St, Flora, MS 39071</p>
                         <p className="phone" style={{ fontSize: '1.5rem', fontWeight: 'bold', margin: '16px 0' }}>(601) 665-2299</p>
                         <div className="contact-actions">
-                            <button className="btn btn-primary">Get Directions</button>
-                            <a href="tel:6016652299" className="btn btn-secondary" style={{ color: '#fff', borderColor: '#fff' }}>Call Now</a>
+                            <button className="btn-dark">Get Directions</button>
+                            <a href="tel:6016652299" className="btn-gold" style={{ marginLeft: '16px' }}>Call Now</a>
                         </div>
                     </div>
                 </div>
             </section>
-
-            <StickyMobileBar />
         </div>
     );
 };

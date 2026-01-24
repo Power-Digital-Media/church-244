@@ -1,8 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import Navbar from './components/Navbar';
+import DockNavbar from './components/DockNavbar';
 import Footer from './components/Footer';
-import StickyMobileBar from './components/StickyMobileBar';
 
 // Import Pages
 import Home from './pages/Home';
@@ -19,8 +18,9 @@ function App() {
     return (
         <HelmetProvider>
             <BrowserRouter>
-                {/* ScrollToTop component could be added here */}
-                <Navbar />
+                {/* V2 Navigation: Dock */}
+                <DockNavbar />
+
                 <main>
                     <Routes>
                         <Route path="/" element={<Home />} />
@@ -33,7 +33,6 @@ function App() {
                     </Routes>
                 </main>
                 <Footer />
-                <StickyMobileBar />
             </BrowserRouter>
         </HelmetProvider>
     );
