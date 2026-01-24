@@ -1,0 +1,91 @@
+:root {
+  /* Colors */
+  --color-primary: #1B5E20;      /* Deep Pharmacy Green */
+  --color-primary-light: #4c8c4a;
+  --color-secondary: #FFF8E1;    /* Soft Cream */
+  --color-text: #333333;         /* Dark Grey */
+  --color-text-light: #666666;
+  --color-white: #FFFFFF;
+  --color-bg-light: #F9FAFB;
+  --color-error: #D32F2F;
+  --color-success: #388E3C;
+  --color-shadow: rgba(0, 0, 0, 0.1);
+
+  /* Spacing */
+  --container-width: 1200px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 48px;
+
+  /* Typography */
+  --font-main: 'Inter', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--color-white);
+  color: var(--color-text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+/* Utilities */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: 9999px; /* Rounded pill buttons */
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-light);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px var(--color-shadow);
+}
+
+.btn-secondary {
+  background-color: var(--color-secondary);
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-white);
+}

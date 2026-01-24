@@ -1,0 +1,104 @@
+.hero {
+    background: linear-gradient(135deg, var(--color-bg-light) 0%, #e8f5e9 100%);
+    padding: var(--spacing-xl) 0;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-xl);
+}
+
+.hero-content {
+    flex: 1;
+    max-width: 600px;
+}
+
+.hero-title {
+    font-size: 3rem;
+    line-height: 1.2;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-md);
+    font-weight: 700;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-lg);
+    line-height: 1.6;
+}
+
+.hero-actions {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    flex-wrap: wrap;
+}
+
+.hero-call-mobile {
+    margin-bottom: var(--spacing-md);
+    display: none;
+    /* Show on mobile only usually, but user wanted it visible */
+}
+
+.call-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    color: var(--color-primary);
+}
+
+.hero-badges {
+    display: flex;
+    gap: var(--spacing-md);
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    font-weight: 500;
+    flex-wrap: wrap;
+}
+
+.hero-visual {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .hero-container {
+        flex-direction: column-reverse;
+        /* Visual on top? Or bottom? usually bottom for mobile so text is first */
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-title {
+        font-size: 2.25rem;
+    }
+
+    .hero-actions {
+        justify-content: center;
+    }
+
+    .hero-badges {
+        justify-content: center;
+        font-size: 0.8rem;
+    }
+
+    .hero-visual {
+        margin-top: var(--spacing-lg);
+    }
+
+    /* Show call link prominently on mobile */
+    .hero-call-mobile {
+        display: block;
+    }
+}
