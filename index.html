@@ -280,11 +280,19 @@
         <p class="section-header__subtitle">Catch up on what God is speaking through Church 244. New messages every week.</p>
       </div>
       
-      <div class="sermons__grid" id="sermonsGrid">
-        <!-- Skeleton loaders -->
-        <div class="sermons__skeleton"><div class="sermons__skeleton-thumb"></div><div class="sermons__skeleton-text"></div><div class="sermons__skeleton-text sermons__skeleton-text--short"></div></div>
-        <div class="sermons__skeleton"><div class="sermons__skeleton-thumb"></div><div class="sermons__skeleton-text"></div><div class="sermons__skeleton-text sermons__skeleton-text--short"></div></div>
-        <div class="sermons__skeleton"><div class="sermons__skeleton-thumb"></div><div class="sermons__skeleton-text"></div><div class="sermons__skeleton-text sermons__skeleton-text--short"></div></div>
+      <div class="sermons__carousel">
+        <button class="sermons__arrow sermons__arrow--prev" id="sermonsPrev" aria-label="Previous sermons">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div class="sermons__track" id="sermonsGrid">
+          <!-- Skeleton loaders -->
+          <div class="sermons__skeleton"><div class="sermons__skeleton-thumb"></div><div class="sermons__skeleton-text"></div><div class="sermons__skeleton-text sermons__skeleton-text--short"></div></div>
+          <div class="sermons__skeleton"><div class="sermons__skeleton-thumb"></div><div class="sermons__skeleton-text"></div><div class="sermons__skeleton-text sermons__skeleton-text--short"></div></div>
+          <div class="sermons__skeleton"><div class="sermons__skeleton-thumb"></div><div class="sermons__skeleton-text"></div><div class="sermons__skeleton-text sermons__skeleton-text--short"></div></div>
+        </div>
+        <button class="sermons__arrow sermons__arrow--next" id="sermonsNext" aria-label="Next sermons">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
       </div>
       
       <div class="sermons__footer reveal">
@@ -293,6 +301,7 @@
           View All Sermons on YouTube →
         </a>
       </div>
+
     </div>
 
     <!-- Video Modal -->

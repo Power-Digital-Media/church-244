@@ -325,6 +325,41 @@ function initSermons() {
     if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
   });
 
+  // Carousel arrow navigation
+  const prevBtn = document.getElementById('sermonsPrev');
+  const nextBtn = document.getElementById('sermonsNext');
+
+  function updateArrows() {
+    if (!prevBtn || !nextBtn) return;
+    const { scrollLeft, scrollWidth, clientWidth } = grid;
+    prevBtn.disabled = scrollLeft <= 5;
+    nextBtn.disabled = scrollLeft + clientWidth >= scrollWidth - 5;
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      const card = grid.querySelector('.sermons__card');
+      const scrollAmount = card ? card.offsetWidth + 24 : 380;
+      grid.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      const card = grid.querySelector('.sermons__card');
+      const scrollAmount = card ? card.offsetWidth + 24 : 380;
+      grid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    });
+  }
+
+  grid.addEventListener('scroll', updateArrows);
+  // Update arrows once sermons load
+  const origRender = renderSermons;
+  renderSermons = function(sermons) {
+    origRender(sermons);
+    setTimeout(updateArrows, 100);
+  };
+
   fetchSermons();
 }
 

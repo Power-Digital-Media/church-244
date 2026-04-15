@@ -1739,10 +1739,63 @@ img {
   background: linear-gradient(90deg, transparent, var(--c-accent-glow-strong), transparent);
 }
 
-.sermons__grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--s-xl);
+.sermons__carousel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--s-md);
+}
+
+.sermons__track {
+  display: flex;
+  gap: var(--s-lg);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: var(--s-sm) 0;
+  flex: 1;
+}
+
+.sermons__track::-webkit-scrollbar {
+  display: none;
+}
+
+.sermons__track > * {
+  min-width: 340px;
+  max-width: 380px;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+}
+
+.sermons__arrow {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--c-border);
+  background: var(--c-bg-card);
+  color: var(--c-text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--t-base);
+  z-index: 2;
+}
+
+.sermons__arrow:hover {
+  border-color: var(--c-accent);
+  color: var(--c-accent);
+  background: var(--c-bg-elevated);
+  box-shadow: 0 0 20px rgba(212, 168, 83, 0.15);
+}
+
+.sermons__arrow:disabled {
+  opacity: 0.25;
+  cursor: default;
+  pointer-events: none;
 }
 
 .sermons__card {
@@ -2317,10 +2370,12 @@ img {
    RESPONSIVE — NEW SECTIONS
    ═══════════════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
-  .sermons__grid {
-    grid-template-columns: 1fr;
-    max-width: 400px;
-    margin: 0 auto;
+  .sermons__arrow {
+    display: none;
+  }
+
+  .sermons__track > * {
+    min-width: 280px;
   }
 
   .events__grid {
@@ -2341,11 +2396,7 @@ img {
   }
 }
 
-@media (min-width: 769px) and (max-width: 1024px) {
-  .sermons__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
+
 
 /* ═══════════════════════════════════════════════════════════════
    LEADERSHIP GRID
