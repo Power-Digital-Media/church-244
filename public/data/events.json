@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Sunday Morning Worship",
+    "date": "2026-04-20",
+    "time": "10:00 AM",
+    "description": "Join us for our regular Sunday morning worship service. Powerful worship, anointed preaching, and genuine community.",
+    "recurring": true,
+    "registerUrl": ""
+  },
+  {
+    "title": "Wednesday Bible Study",
+    "date": "2026-04-23",
+    "time": "6:30 PM",
+    "description": "Dig deeper into the Word. Fellowship starts at 6:30 PM, adult Bible study at 7:00 PM.",
+    "recurring": true,
+    "registerUrl": ""
+  },
+  {
+    "title": "Youth Night",
+    "date": "2026-04-24",
+    "time": "6:30 PM",
+    "description": "Ages 13–19. Worship, the Word, and real community for the next generation.",
+    "recurring": true,
+    "registerUrl": "https://church244.churchcenter.com/registrations"
+  }
+]
