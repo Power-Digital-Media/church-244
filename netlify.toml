@@ -22,6 +22,13 @@
 [functions]
   node_bundler = "esbuild"
 
+# Canonical redirect: www.church244.com -> church244.com
+[[redirects]]
+  from = "https://www.church244.com/*"
+  to = "https://church244.com/:splat"
+  status = 301
+  force = true
+
 # NOTE: Form email notifications must be configured in the Netlify dashboard:
 # Site Settings → Forms → Form notifications → Email notification
 # Set to: joshua.watts@yahoo.com

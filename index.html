@@ -23,20 +23,21 @@
   
   <link rel="stylesheet" href="/src/style.css" />
 
-  <!-- Google Analytics (GA4) -->
-  <script>
-    if (import.meta.env.VITE_GA_ID) {
-      const script = document.createElement('script');
-      script.async = true;
-      script.src = `https://www.googletagmanager.com/gtag/js?id=${import.meta.env.VITE_GA_ID}`;
-      document.head.appendChild(script);
-
-      window.dataLayer = window.dataLayer || [];
-      window.gtag = function() { window.dataLayer.push(arguments); };
-      gtag('js', new Date());
-      gtag('config', import.meta.env.VITE_GA_ID);
+  <!-- Speakable Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://church244.com/#webpage",
+    "url": "https://church244.com/",
+    "speakable": {
+      "@type": "SpeakableSpecification",
+      "cssSelector": ["h1", "h2"]
     }
+  }
   </script>
+
+
 </head>
 
 <body>
@@ -856,7 +857,7 @@
       
       <div class="footer__bottom">
         <p>&copy; 2026 Church 244. All rights reserved.</p>
-        <p class="footer__credit">Made with ❤️ for the Kingdom</p>
+        <p class="footer__credit">Made with ❤️ for the Kingdom · Designed & Engineered by <a href="https://powerdigitalmedia.org" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline; text-underline-offset: 3px;">Power Digital Media</a></p>
       </div>
     </div>
   </footer>

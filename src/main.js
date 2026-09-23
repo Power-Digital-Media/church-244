@@ -7,6 +7,7 @@ import './style.css';
 
 // ── DOM Ready ─────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
+  initAnalytics();
   initNavigation();
   initScrollReveal();
   initParticles();
@@ -16,6 +17,24 @@ document.addEventListener('DOMContentLoaded', () => {
   initEvents();
   initContactForm();
 });
+
+// ═══════════════════════════════════════════════════════════════
+// ANALYTICS
+// ═══════════════════════════════════════════════════════════════
+function initAnalytics() {
+  const gaId = import.meta.env.VITE_GA_ID;
+  if (!gaId) return;
+
+  const script = document.createElement('script');
+  script.async = true;
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
+  document.head.appendChild(script);
+
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function() { window.dataLayer.push(arguments); };
+  window.gtag('js', new Date());
+  window.gtag('config', gaId);
+}
 
 // ═══════════════════════════════════════════════════════════════
 // NAVIGATION
