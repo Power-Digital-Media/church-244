@@ -511,6 +511,13 @@ function initContactForm() {
       if (res.ok) {
         form.style.display = 'none';
         success.style.display = 'block';
+        window.gtag?.('event', 'generate_lead', {
+          event_category: 'lead_form',
+          form_source: 'church244_contact_form',
+          request_type: formData.get('type') || 'general',
+          currency: 'USD',
+          value: 1,
+        });
       } else {
         throw new Error('Form submission failed');
       }
