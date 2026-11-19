@@ -8,24 +8,13 @@
     {
       "identifier": "urn:air:church244.com:docs:llms-txt",
       "displayName": "Church 244 Service Times, Ministries & Visitor Directory",
-      "type": "text/markdown",
+      "type": "text/markdown; profile=\"urn:air:agent-skills\"",
       "url": "https://church244.com/llms.txt",
       "description": "Official guide to Church 244 in Richland, MS — Sunday worship, Wednesday Bible study, Thursday youth, Pastor Josh Watts, and visitor information.",
       "representativeQueries": [
         "churches in Richland Florence Pearl and Brandon Mississippi",
         "Church 244 service times address and pastor",
         "youth group and family church near Richland MS"
-      ]
-    },
-    {
-      "identifier": "urn:air:church244.com:web:homepage",
-      "displayName": "Plan Your Visit to Church 244",
-      "type": "text/html",
-      "url": "https://church244.com/",
-      "description": "Service times, directions to 129 Center St Suite F in Richland, MS, sermon videos, ministries, and upcoming family events.",
-      "representativeQueries": [
-        "visit Church 244 in Richland MS",
-        "watch Church 244 sermons online"
       ]
     }
   ]
