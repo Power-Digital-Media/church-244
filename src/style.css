@@ -132,6 +132,13 @@ img {
               transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Ensure above-the-fold hero text paints immediately on Frame 1 for instant mobile LCP */
+.hero .reveal {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
 .reveal.revealed {
   opacity: 1;
   transform: translateY(0);
@@ -389,7 +396,7 @@ img {
   position: absolute;
   inset: 0;
   z-index: 0;
-  background: url('/images/worship-hero.jpg') center center / cover no-repeat;
+  background: url('/images/worship-hero.webp') center center / cover no-repeat;
 }
 
 .hero__bg::after {
