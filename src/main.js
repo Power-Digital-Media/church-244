@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // ═══════════════════════════════════════════════════════════════
 function initAnalytics() {
   const gaId = import.meta.env.VITE_GA_ID;
-  if (!gaId) return;
+  if (!gaId || window.gtag) return;
 
   const script = document.createElement('script');
   script.async = true;
