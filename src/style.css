@@ -2058,6 +2058,7 @@ img {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: var(--s-xl);
+  min-height: 210px;
 }
 
 .events__card {

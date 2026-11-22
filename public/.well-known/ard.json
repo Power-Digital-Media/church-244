@@ -7,29 +7,15 @@
   "entries": [
     {
       "identifier": "urn:air:church244.com:docs:llms-txt",
-      "displayName": "Church 244 Service Times, Ministries & Visitor Directory",
+      "displayName": "Church 244 Service Times, Ministries, Prayer & Visitor Directory",
       "type": "text/markdown; profile=\"urn:air:agent-skills\"",
       "url": "https://church244.com/llms.txt",
-      "description": "Official guide to Church 244 in Richland, MS — Sunday worship, Wednesday Bible study, Thursday youth, Pastor Josh Watts, prayer requests, and visitor FAQ.",
+      "description": "Official guide to Church 244 in Richland, MS — Sunday worship, Wednesday Bible study, Thursday youth, Pastor Josh Watts, prayer requests, and first-time visitor FAQ.",
       "representativeQueries": [
         "Spirit-filled churches in Richland Florence Pearl and Brandon Mississippi",
         "Church 244 service times address pastor and first-time visitor FAQ",
         "youth group children's ministry and prayer request near Richland MS"
       ]
-    },
-    {
-      "identifier": "urn:air:church244.com:web:plan-your-visit",
-      "displayName": "Plan Your Visit to Church 244 (Richland, MS)",
-      "type": "text/html",
-      "url": "https://church244.com/plan-your-visit",
-      "description": "Complete first-time visitor guide, service schedule, directions off Hwy 49 S, and FAQ for families visiting Church 244."
-    },
-    {
-      "identifier": "urn:air:church244.com:web:prayer",
-      "displayName": "Submit a Prayer Request — Church 244",
-      "type": "text/html",
-      "url": "https://church244.com/prayer",
-      "description": "Confidential prayer request form for Pastor Josh Watts and the Church 244 prayer team."
     }
   ]
 }
