@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Google Analytics 4 (G-Z0R5S6FSTM) + GTM (GTM-NCMMVH8G) — Deferred Zero-TBT Loader -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', 'G-Z0R5S6FSTM', { send_page_view: true });
+    window.trackChurchEvent = function(eventName, params) {
+      var payload = Object.assign({ page_path: window.location.pathname }, params || {});
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', eventName, payload);
+      } else {
+        window.dataLayer.push(Object.assign({ event: eventName }, payload));
+      }
+    };
+    (function() {
+      var loaded = false;
+      function loadAnalytics() {
+        if (loaded) return;
+        loaded = true;
+        var ga = document.createElement('script');
+        ga.async = true;
+        ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-Z0R5S6FSTM';
+        document.head.appendChild(ga);
+        window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        var gtm = document.createElement('script');
+        gtm.async = true;
+        gtm.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-NCMMVH8G';
+        document.head.appendChild(gtm);
+      }
+      ['pointerdown', 'keydown', 'touchstart', 'scroll'].forEach(function(ev) {
+        window.addEventListener(ev, loadAnalytics, { once: true, passive: true });
+      });
+      window.addEventListener('load', function() {
+        setTimeout(loadAnalytics, 3200);
+      });
+    })();
+  </script>
+
+  <title>Youth, Kids &amp; Adult Ministries | Church 244 Richland, MS</title>
+  <meta name="description" content="Explore ministries at Church 244 in Richland, MS — Thursday Youth Group (ages 13–19), Children's Ministry, Men of God Monday, and Women's Ministry." />
+  <link rel="canonical" href="https://church244.com/ministries" />
+
+  <meta property="og:title" content="Youth, Kids &amp; Adult Ministries | Church 244 Richland, MS" />
+  <meta property="og:description" content="Find your community at Church 244 — Youth (ages 13–19), Children's Ministry, Men's &amp; Women's discipleship, Worship, and Rankin County outreach." />
+  <meta property="og:url" content="https://church244.com/ministries" />
+  <meta property="og:site_name" content="Church 244" />
+  <meta property="og:image" content="https://church244.com/images/worship-hero.jpg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_US" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Youth, Kids &amp; Adult Ministries | Church 244 Richland, MS" />
+  <meta name="twitter:description" content="Youth Thursdays at 6:30 PM, Kids Ministry, Men of God Monday, Women's Ministry, and Richland outreach." />
+  <meta name="twitter:image" content="https://church244.com/images/worship-hero.jpg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  </noscript>
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="stylesheet" href="/src/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "@id": "https://church244.com/ministries#webpage",
+        "name": "Youth, Kids & Adult Ministries | Church 244 Richland, MS",
+        "url": "https://church244.com/ministries",
+        "description": "Youth, Children's, Men's, Women's, Worship, and Community Outreach ministries at Church 244 in Richland, Mississippi.",
+        "isPartOf": { "@id": "https://church244.com/#website" },
+        "about": { "@id": "https://church244.com/#church" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://church244.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Ministries", "item": "https://church244.com/ministries" }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <nav class="nav scrolled" id="navbar" data-solid="true" aria-label="Primary navigation">
+    <div class="nav__container">
+      <a href="/" class="nav__logo">
+        <img src="/images/church244-logo-v2.webp" alt="Church 244 - Kingdom Minded" width="100" height="40" class="nav__logo-img" />
+      </a>
+      <ul class="nav__links" id="navLinks">
+        <li><a href="/#about" class="nav__link">About</a></li>
+        <li><a href="/#services" class="nav__link">Services</a></li>
+        <li><a href="/#sermons" class="nav__link">Sermons</a></li>
+        <li><a href="/#pastor" class="nav__link">Leadership</a></li>
+        <li><a href="/ministries" class="nav__link" aria-current="page">Ministries</a></li>
+        <li><a href="/prayer" class="nav__link">Prayer</a></li>
+        <li><a href="/plan-your-visit" class="nav__link">Plan Your Visit</a></li>
+        <li><a href="https://church244.churchcenter.com/giving/to/general" target="_blank" rel="noopener noreferrer" class="nav__link nav__link--give">Give</a></li>
+      </ul>
+      <button class="nav__hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main id="main-content">
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero__breadcrumb reveal">
+          <a href="/">Home</a> <span aria-hidden="true">/</span> <span>Ministries</span>
+        </div>
+        <h1 class="page-hero__title reveal">A Place for Every <span class="text-accent">Generation</span></h1>
+        <p class="page-hero__subtitle reveal">
+          From children and teens to men's and women's discipleship, Church 244 is built so nobody walks through life alone.
+        </p>
+        <div class="page-hero__actions reveal">
+          <a href="#connect" class="btn btn--primary">Get Connected</a>
+          <a href="/plan-your-visit" class="btn btn--ghost">Plan Your Visit</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="ministries" id="all-ministries">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-header__eyebrow">Discipleship &amp; Community</span>
+          <h2 class="section-header__title">Church 244 <span class="text-accent">Ministries</span></h2>
+          <p class="section-header__subtitle">Serving families across Richland, Florence, Pearl, Brandon, and South Jackson.</p>
+        </div>
+
+        <div class="ministries__grid">
+          <div class="ministries__card reveal" id="youth">
+            <div class="ministries__card-image">
+              <img src="/images/youth-outing.webp" alt="Church 244 Youth Ministry in Richland, MS" width="960" height="1280" loading="lazy" decoding="async" />
+            </div>
+            <div class="ministries__card-body">
+              <span class="ministries__card-tag">Ages 13–19 · Thursdays 6:30 PM</span>
+              <h3>Church 244 Youth</h3>
+              <p>Led by Youth Pastor Nick &amp; Shanna Weeks, teens gather every Thursday from 6:30 – 8:00 PM for passionate worship, unfiltered biblical truth, and real Christ-centered friendships.</p>
+            </div>
+          </div>
+
+          <div class="ministries__card reveal" id="kids">
+            <div class="ministries__card-image">
+              <img src="/images/easter-kids.webp" alt="Church 244 Children's Ministry in Richland, MS" width="960" height="720" loading="lazy" decoding="async" />
+            </div>
+            <div class="ministries__card-body">
+              <span class="ministries__card-tag">Sundays &amp; Events</span>
+              <h3>Children's Ministry</h3>
+              <p>Led by London &amp; Andrew Perkins, our kids ministry creates a safe, joyful, Scripture-filled environment where children encounter Jesus and fall in love with God's Word.</p>
+            </div>
+          </div>
+
+          <div class="ministries__card reveal" id="men">
+            <div class="ministries__card-image">
+              <img src="/images/mens-group.webp" alt="Men of God Monday at Church 244" width="1280" height="960" loading="lazy" decoding="async" />
+            </div>
+            <div class="ministries__card-body">
+              <span class="ministries__card-tag">Men's Brotherhood</span>
+              <h3>Men of God Monday</h3>
+              <p>Iron sharpens iron. Led alongside Matthew Owens, our men gather to study Scripture, pray boldly, and strengthen one another as husbands, fathers, and servant leaders.</p>
+            </div>
+          </div>
+
+          <div class="ministries__card reveal" id="women">
+            <div class="ministries__card-image">
+              <img src="/images/womens-ministry.webp" alt="Church 244 Women's Ministry" width="1280" height="960" loading="lazy" decoding="async" />
+            </div>
+            <div class="ministries__card-body">
+              <span class="ministries__card-tag">Sisterhood</span>
+              <h3>Women's Ministry</h3>
+              <p>Led alongside Lexie Owens, our women's ministry brings women of all ages together for prayer, Bible study, fellowship nights, and authentic encouragement through every season.</p>
+            </div>
+          </div>
+
+          <div class="ministries__card reveal" id="worship">
+            <div class="ministries__card-image">
+              <img src="/images/worship-service.webp" alt="Church 244 Praise and Worship Team" width="960" height="720" loading="lazy" decoding="async" />
+            </div>
+            <div class="ministries__card-body">
+              <span class="ministries__card-tag">Praise &amp; Production</span>
+              <h3>Worship Ministry</h3>
+              <p>Led by Nick &amp; Amy Hare, our worship and media team exists to minister to the Lord first and usher our church family into God's presence every Sunday and Wednesday.</p>
+            </div>
+          </div>
+
+          <div class="ministries__card reveal" id="outreach">
+            <div class="ministries__card-image">
+              <img src="/images/outreach-booth.webp" alt="Richland Community Outreach by Church 244" width="1280" height="960" loading="lazy" decoding="async" />
+            </div>
+            <div class="ministries__card-body">
+              <span class="ministries__card-tag">Richland &amp; Rankin County</span>
+              <h3>Community Outreach</h3>
+              <p>From Easter celebrations and Trunk-or-Treat to local family assistance and baptisms, we believe the church shines brightest when serving our Richland neighbors.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="connect">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-header__eyebrow">Step In</span>
+          <h2 class="section-header__title">Connect With a <span class="text-accent">Ministry</span></h2>
+          <p class="section-header__subtitle">Have questions about Youth, Kids, Men's or Women's gatherings, or ready to serve on a team? Reach out below.</p>
+        </div>
+
+        <div class="contact__layout">
+          <form class="contact__form reveal" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contactForm" data-form-source="ministries_page">
+            <input type="hidden" name="form-name" value="contact" />
+            <input type="hidden" name="subject" value="Church 244 — Ministry Connection" />
+            <input type="hidden" name="page_source" value="ministries" />
+            <p class="contact__honeypot" style="display:none;"><label>Don't fill this out: <input name="bot-field" /></label></p>
+
+            <div class="contact__form-row">
+              <div class="contact__field">
+                <label for="min-name" class="contact__label">Name</label>
+                <input type="text" id="min-name" name="name" required autocomplete="name" class="contact__input" placeholder="Your full name" />
+              </div>
+              <div class="contact__field">
+                <label for="min-email" class="contact__label">Email</label>
+                <input type="email" id="min-email" name="email" required autocomplete="email" class="contact__input" placeholder="you@example.com" />
+              </div>
+            </div>
+
+            <div class="contact__form-row">
+              <div class="contact__field">
+                <label for="min-phone" class="contact__label">Phone <span class="contact__optional">(optional)</span></label>
+                <input type="tel" id="min-phone" name="phone" autocomplete="tel" class="contact__input" placeholder="(601) 555-0123" />
+              </div>
+              <div class="contact__field">
+                <label for="min-type" class="contact__label">How Can We Connect You?</label>
+                <select id="min-type" name="type" required class="contact__input contact__select">
+                  <option value="volunteer" selected>Connect With a Ministry / Serve</option>
+                  <option value="visitor">First-Time Visitor Question</option>
+                  <option value="general">Youth or Kids Ministry Question</option>
+                  <option value="prayer">Prayer Request</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="contact__field">
+              <label for="min-message" class="contact__label">Which ministry are you interested in?</label>
+              <textarea id="min-message" name="message" required class="contact__input contact__textarea" placeholder="Tell us about you or your family — Youth, Kids, Men's, Women's, Worship, or Outreach!" rows="4"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn--primary btn--large contact__submit" id="contactSubmit">
+              <span class="contact__submit-text">Get Connected</span>
+              <span class="contact__submit-loading" style="display:none;">
+                <svg class="contact__spinner" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="30 70" /></svg>
+                Sending...
+              </span>
+            </button>
+          </form>
+
+          <div class="contact__success" id="contactSuccess" style="display:none;" role="status" aria-live="polite">
+            <div class="contact__success-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="48" height="48"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <h3>We've Got Your Info!</h3>
+            <p>One of our Church 244 ministry leaders will follow up with you shortly.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <div class="footer__logo">
+            <img src="/images/church244-logo-v2.webp" alt="Church 244 - Kingdom Minded" width="138" height="55" loading="lazy" decoding="async" class="footer__logo-img" />
+          </div>
+          <p class="footer__tagline">Kingdom Minded · A Christ-centered, Spirit-filled church family in Richland, Mississippi.</p>
+        </div>
+        <div class="footer__col">
+          <h3>Service Times</h3>
+          <ul>
+            <li>Sunday Worship: 10:00 AM</li>
+            <li>Wednesday Bible Study: 6:30 PM</li>
+            <li>Youth Thursday: 6:30 PM</li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/plan-your-visit">Plan Your Visit</a></li>
+            <li><a href="/prayer">Prayer Request</a></li>
+            <li><a href="/#sermons">Watch Sermons</a></li>
+            <li><a href="https://church244.churchcenter.com/giving/to/general" target="_blank" rel="noopener noreferrer">Online Giving</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3>Contact</h3>
+          <ul>
+            <li>129 Center St, Suite F</li>
+            <li>Richland, MS 39218</li>
+            <li><a href="tel:+16013171482">(601) 317-1482</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2026 Church 244. All rights reserved.</p>
+        <p class="footer__credit">Made with ❤️ for the Kingdom · Designed &amp; Engineered by <a href="https://powerdigitalmedia.org" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline; text-underline-offset: 3px;">Power Digital Media</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

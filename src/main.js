@@ -1,13 +1,13 @@
 /* ═══════════════════════════════════════════════════════════════
    CHURCH 244 — Main JavaScript
-   Scroll animations, navigation, particles, counters
+   Scroll animations, navigation, particles, sermons, events & GA4 Key Events
    ═══════════════════════════════════════════════════════════════ */
 
 import './style.css';
 
 // ── DOM Ready ─────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-  initAnalytics();
+  initTrackedInteractions();
   initNavigation();
   initScrollReveal();
   initParticles();
@@ -19,21 +19,57 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ═══════════════════════════════════════════════════════════════
-// ANALYTICS
+// ANALYTICS EVENT HELPER (GA4 G-Z0R5S6FSTM + GTM-NCMMVH8G)
 // ═══════════════════════════════════════════════════════════════
-function initAnalytics() {
-  const gaId = import.meta.env.VITE_GA_ID;
-  if (!gaId || window.gtag) return;
+function trackEvent(eventName, params = {}) {
+  try {
+    if (typeof window.trackChurchEvent === 'function') {
+      window.trackChurchEvent(eventName, params);
+      return;
+    }
+    const payload = { page_path: window.location.pathname, ...params };
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', eventName, payload);
+    } else if (Array.isArray(window.dataLayer)) {
+      window.dataLayer.push({ event: eventName, ...payload });
+    }
+  } catch {
+    // Non-blocking analytics safeguard
+  }
+}
 
-  const script = document.createElement('script');
-  script.async = true;
-  script.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
-  document.head.appendChild(script);
+function initTrackedInteractions() {
+  // 1. Key Event: click_to_call on all phone links
+  document.querySelectorAll('a[href^="tel:"]').forEach((link) => {
+    link.addEventListener('click', () => {
+      const section = link.closest('section, footer, nav');
+      const location = section?.id || section?.tagName?.toLowerCase() || 'page';
+      trackEvent('click_to_call', {
+        phone_number: '+16013171482',
+        link_location: location,
+        link_text: (link.textContent || '').trim().slice(0, 60),
+      });
+    });
+  });
 
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = function() { window.dataLayer.push(arguments); };
-  window.gtag('js', new Date());
-  window.gtag('config', gaId);
+  // 2. Directions clicks
+  document.querySelectorAll('a[href*="google.com/maps"]').forEach((link) => {
+    link.addEventListener('click', () => {
+      trackEvent('get_directions_click', {
+        destination: '129 Center St Suite F Richland MS 39218',
+      });
+    });
+  });
+
+  // 3. Online Giving clicks
+  document.querySelectorAll('a[href*="churchcenter.com/giving"]').forEach((link) => {
+    link.addEventListener('click', () => {
+      const section = link.closest('section, footer, nav');
+      trackEvent('give_online_click', {
+        link_location: section?.id || section?.tagName?.toLowerCase() || 'page',
+      });
+    });
+  });
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -43,34 +79,36 @@ function initNavigation() {
   const nav = document.getElementById('navbar');
   const hamburger = document.getElementById('hamburger');
   const navLinks = document.getElementById('navLinks');
-  
-  // Scroll effect
+  if (!nav) return;
+
   const handleScroll = () => {
-    if (window.scrollY > 50) {
+    if (window.scrollY > 50 || nav.dataset.solid === 'true') {
       nav.classList.add('scrolled');
     } else {
       nav.classList.remove('scrolled');
     }
   };
-  
+
   window.addEventListener('scroll', handleScroll, { passive: true });
   handleScroll();
-  
-  // Hamburger toggle
-  hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navLinks.classList.toggle('open');
-    document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
-  });
-  
-  // Close mobile nav on link click
-  navLinks.querySelectorAll('.nav__link').forEach(link => {
-    link.addEventListener('click', () => {
-      hamburger.classList.remove('active');
-      navLinks.classList.remove('open');
-      document.body.style.overflow = '';
+
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      hamburger.classList.toggle('active', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      document.body.style.overflow = isOpen ? 'hidden' : '';
     });
-  });
+
+    navLinks.querySelectorAll('.nav__link').forEach((link) => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
+        navLinks.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+  }
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -78,13 +116,13 @@ function initNavigation() {
 // ═══════════════════════════════════════════════════════════════
 function initScrollReveal() {
   const reveals = document.querySelectorAll('.reveal');
-  
+  if (!reveals.length) return;
+
   const observer = new IntersectionObserver(
     (entries) => {
-      entries.forEach((entry, index) => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          // Stagger the reveal animations
-          const delay = entry.target.dataset.delay || 0;
+          const delay = Number(entry.target.dataset.delay || 0);
           setTimeout(() => {
             entry.target.classList.add('revealed');
           }, delay);
@@ -97,17 +135,16 @@ function initScrollReveal() {
       rootMargin: '0px 0px -50px 0px',
     }
   );
-  
-  // Add stagger delays to grouped elements
-  const groups = document.querySelectorAll('.about__grid, .services__grid, .community__grid, .sermons__grid, .events__grid');
-  groups.forEach(group => {
+
+  const groups = document.querySelectorAll('.about__grid, .services__grid, .community__grid, .sermons__grid, .events__grid, .ministries__grid, .faq-list');
+  groups.forEach((group) => {
     const items = group.querySelectorAll('.reveal');
     items.forEach((item, i) => {
-      item.dataset.delay = i * 100;
+      item.dataset.delay = String(i * 90);
     });
   });
-  
-  reveals.forEach(el => observer.observe(el));
+
+  reveals.forEach((el) => observer.observe(el));
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -116,24 +153,21 @@ function initScrollReveal() {
 function initParticles() {
   const container = document.getElementById('heroParticles');
   if (!container) return;
-  
-  const particleCount = 30;
-  
+
+  const particleCount = 24;
+  const colors = ['#d4a853', '#e8c97a', '#ffffff', '#d4a853'];
+
   for (let i = 0; i < particleCount; i++) {
     const particle = document.createElement('div');
     particle.className = 'hero__particle';
-    
     particle.style.left = `${Math.random() * 100}%`;
     particle.style.animationDuration = `${6 + Math.random() * 8}s`;
     particle.style.animationDelay = `${Math.random() * 8}s`;
-    particle.style.width = `${1 + Math.random() * 3}px`;
-    particle.style.height = particle.style.width;
-    particle.style.opacity = 0;
-    
-    // Vary colors between gold and white
-    const colors = ['#d4a853', '#e8c97a', '#ffffff', '#d4a853'];
+    const size = `${1 + Math.random() * 3}px`;
+    particle.style.width = size;
+    particle.style.height = size;
+    particle.style.opacity = '0';
     particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-    
     container.appendChild(particle);
   }
 }
@@ -143,33 +177,31 @@ function initParticles() {
 // ═══════════════════════════════════════════════════════════════
 function initCountUp() {
   const counters = document.querySelectorAll('[data-count]');
-  
+  if (!counters.length) return;
+
   const observer = new IntersectionObserver(
     (entries) => {
-      entries.forEach(entry => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const el = entry.target;
-          const target = parseInt(el.dataset.count);
+          const target = parseInt(el.dataset.count, 10);
           const duration = 2000;
           const start = performance.now();
-          
+
           const animate = (now) => {
             const elapsed = now - start;
             const progress = Math.min(elapsed / duration, 1);
-            
-            // Ease out cubic
             const eased = 1 - Math.pow(1 - progress, 3);
             const current = Math.floor(eased * target);
-            
             el.textContent = current.toLocaleString();
-            
+
             if (progress < 1) {
               requestAnimationFrame(animate);
             } else {
               el.textContent = target.toLocaleString();
             }
           };
-          
+
           requestAnimationFrame(animate);
           observer.unobserve(el);
         }
@@ -177,26 +209,24 @@ function initCountUp() {
     },
     { threshold: 0.5 }
   );
-  
-  counters.forEach(el => observer.observe(el));
+
+  counters.forEach((el) => observer.observe(el));
 }
 
 // ═══════════════════════════════════════════════════════════════
 // SMOOTH SCROLL
 // ═══════════════════════════════════════════════════════════════
 function initSmoothScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
+      const href = this.getAttribute('href');
+      if (!href || href === '#') return;
+      const target = document.querySelector(href);
       if (target) {
+        e.preventDefault();
         const offset = 80;
         const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
-        
-        window.scrollTo({
-          top,
-          behavior: 'smooth',
-        });
+        window.scrollTo({ top, behavior: 'smooth' });
       }
     });
   });
@@ -212,18 +242,15 @@ function initSermons() {
   const closeBtn = document.getElementById('sermonModalClose');
   const iframe = document.getElementById('sermonIframe');
   const modalTitle = document.getElementById('sermonModalTitle');
-  
+
   if (!grid) return;
 
-  // For local dev, use the YouTube RSS directly as a fallback
-  // In production on Netlify, the serverless function handles this
   const CHANNEL_ID = 'UCsx6xOBAhNqtGU1Aq_NQCdA';
   const RSS_URL = `https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID}`;
   const FUNCTION_URL = '/.netlify/functions/sermons';
 
   async function fetchSermons() {
     try {
-      // Try the Netlify function first
       let sermons;
       try {
         const res = await fetch(FUNCTION_URL);
@@ -232,17 +259,15 @@ function initSermons() {
           sermons = data.sermons;
         }
       } catch {
-        // Netlify function not available (local dev) — parse RSS directly via CORS proxy
+        // Local dev fallback
       }
 
-      // Fallback: parse RSS client-side (for local testing)
       if (!sermons) {
         try {
           const res = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(RSS_URL)}`);
           const xml = await res.text();
           sermons = parseRSS(xml);
         } catch {
-          // If even the proxy fails, show static fallback
           sermons = [];
         }
       }
@@ -250,7 +275,7 @@ function initSermons() {
       renderSermons(sermons);
     } catch (err) {
       console.error('Failed to fetch sermons:', err);
-      grid.innerHTML = '<p style="text-align:center;color:var(--c-text-muted);grid-column:1/-1;">Unable to load sermons. <a href="https://youtube.com/@church244" target="_blank">Watch on YouTube →</a></p>';
+      grid.innerHTML = '<p style="text-align:center;color:var(--c-text-muted);grid-column:1/-1;">Unable to load sermons. <a href="https://youtube.com/@church244" target="_blank" rel="noopener noreferrer">Watch on YouTube →</a></p>';
     }
   }
 
@@ -277,23 +302,34 @@ function initSermons() {
     return sermons;
   }
 
+  const prevBtn = document.getElementById('sermonsPrev');
+  const nextBtn = document.getElementById('sermonsNext');
+
+  function updateArrows() {
+    if (!prevBtn || !nextBtn) return;
+    const { scrollLeft, scrollWidth, clientWidth } = grid;
+    prevBtn.disabled = scrollLeft <= 5;
+    nextBtn.disabled = scrollLeft + clientWidth >= scrollWidth - 5;
+  }
+
   function renderSermons(sermons) {
     if (!sermons || sermons.length === 0) {
-      grid.innerHTML = '<p style="text-align:center;color:var(--c-text-muted);grid-column:1/-1;">No sermons available yet. <a href="https://youtube.com/@church244" target="_blank">Watch on YouTube →</a></p>';
+      grid.innerHTML = '<p style="text-align:center;color:var(--c-text-muted);grid-column:1/-1;">No sermons available yet. <a href="https://youtube.com/@church244" target="_blank" rel="noopener noreferrer">Watch on YouTube →</a></p>';
       return;
     }
 
-    grid.innerHTML = sermons.map(s => {
+    grid.innerHTML = sermons.map((s) => {
       const date = new Date(s.published);
       const dateStr = date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+      const safeTitle = s.title.replace(/"/g, '&quot;');
 
       return `
-        <div class="sermons__card reveal" data-video-id="${s.videoId}" data-title="${s.title.replace(/"/g, '&quot;')}">
+        <div class="sermons__card reveal" data-video-id="${s.videoId}" data-title="${safeTitle}">
           <div class="sermons__card-thumb">
-            <img src="${s.thumbnail}" alt="${s.title.replace(/"/g, '&quot;')}" loading="lazy" />
+            <img src="${s.thumbnail}" alt="${safeTitle}" width="480" height="360" loading="lazy" decoding="async" />
             <div class="sermons__card-play">
               <div class="sermons__card-play-icon">
-                <svg viewBox="0 0 24 24" fill="currentColor" width="24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
               </div>
             </div>
           </div>
@@ -305,10 +341,9 @@ function initSermons() {
       `;
     }).join('');
 
-    // Observe new reveal elements
-    grid.querySelectorAll('.reveal').forEach(el => {
+    grid.querySelectorAll('.reveal').forEach((el) => {
       const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('revealed');
             observer.unobserve(entry.target);
@@ -318,42 +353,38 @@ function initSermons() {
       observer.observe(el);
     });
 
-    // Click to open modal
-    grid.querySelectorAll('.sermons__card').forEach(card => {
+    grid.querySelectorAll('.sermons__card').forEach((card) => {
       card.addEventListener('click', () => {
         const videoId = card.dataset.videoId;
         const title = card.dataset.title;
-        iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-        modalTitle.textContent = title;
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
+        if (iframe && modal && modalTitle) {
+          iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+          modalTitle.textContent = title || '';
+          modal.classList.add('active');
+          document.body.style.overflow = 'hidden';
+          trackEvent('sermon_play', {
+            video_id: videoId,
+            video_title: (title || '').slice(0, 100),
+          });
+        }
       });
     });
+
+    setTimeout(updateArrows, 100);
   }
 
-  // Modal close handlers
   function closeModal() {
+    if (!modal || !iframe) return;
     modal.classList.remove('active');
-    iframe.src = '';
+    iframe.src = 'about:blank';
     document.body.style.overflow = '';
   }
 
   if (closeBtn) closeBtn.addEventListener('click', closeModal);
   if (backdrop) backdrop.addEventListener('click', closeModal);
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+    if (e.key === 'Escape' && modal?.classList.contains('active')) closeModal();
   });
-
-  // Carousel arrow navigation
-  const prevBtn = document.getElementById('sermonsPrev');
-  const nextBtn = document.getElementById('sermonsNext');
-
-  function updateArrows() {
-    if (!prevBtn || !nextBtn) return;
-    const { scrollLeft, scrollWidth, clientWidth } = grid;
-    prevBtn.disabled = scrollLeft <= 5;
-    nextBtn.disabled = scrollLeft + clientWidth >= scrollWidth - 5;
-  }
 
   if (prevBtn) {
     prevBtn.addEventListener('click', () => {
@@ -371,19 +402,12 @@ function initSermons() {
     });
   }
 
-  grid.addEventListener('scroll', updateArrows);
-  // Update arrows once sermons load
-  const origRender = renderSermons;
-  renderSermons = function(sermons) {
-    origRender(sermons);
-    setTimeout(updateArrows, 100);
-  };
-
+  grid.addEventListener('scroll', updateArrows, { passive: true });
   fetchSermons();
 }
 
 // ═══════════════════════════════════════════════════════════════
-// EVENTS (JSON-driven)
+// EVENTS (JSON-driven with accurate same-day & recurring support)
 // ═══════════════════════════════════════════════════════════════
 function initEvents() {
   const grid = document.getElementById('eventsGrid');
@@ -395,25 +419,24 @@ function initEvents() {
       const res = await fetch('/data/events.json');
       const events = await res.json();
 
-      // For recurring events, project them into the future
-      const now = new Date();
-      now.setHours(0, 0, 0, 0);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
 
-      const upcomingEvents = events.map(event => {
-        let eventDate = new Date(event.date + 'T00:00:00');
+      const upcomingEvents = events
+        .map((event) => {
+          let eventDate = new Date(event.date + 'T00:00:00');
 
-        // For recurring events, find the next occurrence
-        if (event.recurring && eventDate < now) {
-          const dayOfWeek = eventDate.getDay();
-          const today = new Date();
-          let daysUntil = dayOfWeek - today.getDay();
-          if (daysUntil <= 0) daysUntil += 7;
-          eventDate = new Date(today);
-          eventDate.setDate(eventDate.getDate() + daysUntil);
-        }
+          if (event.recurring) {
+            const targetDay = typeof event.dayOfWeek === 'number' ? event.dayOfWeek : eventDate.getDay();
+            let daysUntil = targetDay - today.getDay();
+            if (daysUntil < 0) daysUntil += 7;
+            eventDate = new Date(today);
+            eventDate.setDate(today.getDate() + daysUntil);
+          }
 
-        return { ...event, _date: eventDate };
-      }).filter(e => e._date >= now)
+          return { ...event, _date: eventDate };
+        })
+        .filter((e) => e._date >= today)
         .sort((a, b) => a._date - b._date);
 
       renderEvents(upcomingEvents);
@@ -429,17 +452,16 @@ function initEvents() {
       return;
     }
 
-    // Remove empty state
     if (emptyState) emptyState.style.display = 'none';
 
     const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
 
-    const html = events.map(event => {
+    const html = events.map((event) => {
       const date = event._date;
       const month = months[date.getMonth()];
       const day = date.getDate();
-      const registerLink = event.registerUrl 
-        ? `<a href="${event.registerUrl}" target="_blank" rel="noopener noreferrer" class="events__card-link">Register →</a>` 
+      const registerLink = event.registerUrl
+        ? `<a href="${event.registerUrl}" target="_blank" rel="noopener noreferrer" class="events__card-link">Register →</a>`
         : '';
 
       return `
@@ -451,7 +473,7 @@ function initEvents() {
           <div class="events__card-body">
             <h3 class="events__card-title">${event.title}</h3>
             <div class="events__card-time">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
               ${event.time}
             </div>
             <p class="events__card-desc">${event.description}</p>
@@ -463,10 +485,9 @@ function initEvents() {
 
     grid.innerHTML = html;
 
-    // Observe new reveal elements
-    grid.querySelectorAll('.reveal').forEach(el => {
+    grid.querySelectorAll('.reveal').forEach((el) => {
       const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('revealed');
             observer.unobserve(entry.target);
@@ -481,27 +502,53 @@ function initEvents() {
 }
 
 // ═══════════════════════════════════════════════════════════════
-// CONTACT FORM (Netlify Forms)
+// CONTACT / PRAYER / PLAN YOUR VISIT FORM (Netlify Forms + GA4 Key Events)
 // ═══════════════════════════════════════════════════════════════
 function initContactForm() {
   const form = document.getElementById('contactForm');
   const success = document.getElementById('contactSuccess');
   const submitBtn = document.getElementById('contactSubmit');
-  if (!form) return;
+  if (!form || !submitBtn) return;
+
+  const formSource = form.dataset.formSource || 'church244_home_contact';
+  let formStarted = false;
+
+  form.addEventListener('focusin', () => {
+    if (formStarted) return;
+    formStarted = true;
+    trackEvent('form_start', {
+      form_name: 'contact',
+      form_source: formSource,
+    });
+  });
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // Show loading state
     const textEl = submitBtn.querySelector('.contact__submit-text');
     const loadingEl = submitBtn.querySelector('.contact__submit-loading');
-    textEl.style.display = 'none';
-    loadingEl.style.display = 'inline-flex';
+    if (textEl) textEl.style.display = 'none';
+    if (loadingEl) loadingEl.style.display = 'inline-flex';
     submitBtn.disabled = true;
 
     try {
+      const typeSelect = form.querySelector('[name="type"]');
+      const reqType = typeSelect?.value || 'general';
+      const typeLabels = {
+        prayer: 'Prayer Request',
+        visitor: 'Plan Your Visit / First-Time Guest',
+        volunteer: 'Ministry Connection / Volunteer',
+        general: 'General Question',
+        other: 'Website Inquiry',
+      };
+      const subjectInput = form.querySelector('input[name="subject"]');
+      if (subjectInput) {
+        const senderName = (form.querySelector('[name="name"]')?.value || '').trim();
+        subjectInput.value = `Church 244 — ${typeLabels[reqType] || 'Website Message'}${senderName ? ` (${senderName})` : ''}`;
+      }
+
       const formData = new FormData(form);
-      
+
       const res = await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -510,22 +557,31 @@ function initContactForm() {
 
       if (res.ok) {
         form.style.display = 'none';
-        success.style.display = 'block';
-        window.gtag?.('event', 'generate_lead', {
+        if (success) {
+          success.style.display = 'block';
+          success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // Fire BOTH configured GA4 Key Events cleanly
+        trackEvent('form_submit', {
+          form_name: 'contact',
+          form_source: formSource,
+          request_type: reqType,
+        });
+        trackEvent('generate_lead', {
           event_category: 'lead_form',
-          form_source: 'church244_contact_form',
-          request_type: formData.get('type') || 'general',
-          currency: 'USD',
-          value: 1,
+          form_name: 'contact',
+          form_source: formSource,
+          request_type: reqType,
         });
       } else {
-        throw new Error('Form submission failed');
+        throw new Error(`Form submission failed (${res.status})`);
       }
     } catch (err) {
       console.error('Form error:', err);
-      alert('Something went wrong. Please try again or call us at (601) 317-1482.');
-      textEl.style.display = 'inline';
-      loadingEl.style.display = 'none';
+      alert('Something went wrong sending your message. Please try again or call us directly at (601) 317-1482.');
+      if (textEl) textEl.style.display = 'inline';
+      if (loadingEl) loadingEl.style.display = 'none';
       submitBtn.disabled = false;
     }
   });

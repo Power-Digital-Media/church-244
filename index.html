@@ -4,27 +4,65 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Google Tag (GTM-NCMMVH8G / GA4 G-Z0R5S6FSTM) -->
-  <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-NCMMVH8G"></script>
+  <!-- Google Analytics 4 (G-Z0R5S6FSTM) + GTM (GTM-NCMMVH8G) — Deferred Zero-TBT Loader -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
+    window.gtag = gtag;
     gtag('js', new Date());
+    gtag('config', 'G-Z0R5S6FSTM', { send_page_view: true });
+    window.trackChurchEvent = function(eventName, params) {
+      var payload = Object.assign({ page_path: window.location.pathname }, params || {});
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', eventName, payload);
+      } else {
+        window.dataLayer.push(Object.assign({ event: eventName }, payload));
+      }
+    };
+    (function() {
+      var loaded = false;
+      function loadAnalytics() {
+        if (loaded) return;
+        loaded = true;
+        var ga = document.createElement('script');
+        ga.async = true;
+        ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-Z0R5S6FSTM';
+        document.head.appendChild(ga);
+        window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        var gtm = document.createElement('script');
+        gtm.async = true;
+        gtm.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-NCMMVH8G';
+        document.head.appendChild(gtm);
+      }
+      ['pointerdown', 'keydown', 'touchstart', 'scroll'].forEach(function(ev) {
+        window.addEventListener(ev, loadAnalytics, { once: true, passive: true });
+      });
+      window.addEventListener('load', function() {
+        setTimeout(loadAnalytics, 3200);
+      });
+    })();
   </script>
 
-  <title>Church 244 | Richland, MS — Come As You Are</title>
-  <meta name="description" content="Church 244 in Richland, MS — A Christ-centered, Spirit-filled church family led by Pastor Josh Watts. Join us Sundays at 10 AM &amp; Wednesdays at 6:30 PM." />
-  <meta name="keywords" content="Church 244, Richland MS, church near me, Pastor Josh Watts, Sunday worship, youth ministry, Bible study, Richland Mississippi church" />
+  <title>Church 244 | Spirit-Filled Church in Richland, MS</title>
+  <meta name="description" content="Welcome to Church 244 at 129 Center St in Richland, MS — a Spirit-filled church family led by Pastor Josh Watts. Sundays 10 AM &amp; Wednesdays 6:30 PM." />
+  <meta name="keywords" content="Church 244, church in Richland MS, Spirit-filled church Richland MS, Pastor Josh Watts, Sunday worship Richland, youth group Richland MS, churches near Florence and Pearl MS" />
   <link rel="canonical" href="https://church244.com/" />
-  
-  <!-- Open Graph -->
-  <meta property="og:title" content="Church 244 | Richland, MS — Come As You Are" />
-  <meta property="og:description" content="Church 244 in Richland, MS — A Christ-centered, Spirit-filled church family led by Pastor Josh Watts. Join us Sundays at 10 AM &amp; Wednesdays at 6:30 PM." />
+
+  <!-- Open Graph & Twitter -->
+  <meta property="og:title" content="Church 244 | Spirit-Filled Church in Richland, MS" />
+  <meta property="og:description" content="A Christ-centered, Spirit-filled church family in Richland, MS led by Pastor Josh Watts. Join us Sundays at 10 AM, Wednesdays at 6:30 PM &amp; Youth Thursdays at 6:30 PM." />
   <meta property="og:url" content="https://church244.com/" />
+  <meta property="og:site_name" content="Church 244" />
   <meta property="og:image" content="https://church244.com/images/worship-hero.jpg" />
+  <meta property="og:image:width" content="1280" />
+  <meta property="og:image:height" content="1300" />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="en_US" />
-  
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Church 244 | Spirit-Filled Church in Richland, MS" />
+  <meta name="twitter:description" content="Come as you are — a Christ-centered, Spirit-filled church family at 129 Center St, Suite F in Richland, Mississippi." />
+  <meta name="twitter:image" content="https://church244.com/images/worship-hero.jpg" />
+
   <!-- Preload Hero LCP Image -->
   <link rel="preload" as="image" href="/images/worship-hero.webp" type="image/webp" fetchpriority="high" />
 
@@ -36,10 +74,10 @@
   <noscript>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
   </noscript>
-  
+
   <!-- Favicon SVG -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  
+
   <link rel="stylesheet" href="/src/style.css" />
 
   <!-- Structured Data: Church + WebSite + WebPage -->
@@ -51,7 +89,8 @@
         "@type": "Church",
         "@id": "https://church244.com/#church",
         "name": "Church 244",
-        "description": "A Christ-centered, Spirit-filled church community in Richland, Mississippi led by Pastor Josh Watts.",
+        "alternateName": "Church 244 — Kingdom Minded",
+        "description": "A Christ-centered, Spirit-filled church community in Richland, Mississippi led by Pastor Josh Watts, serving families across Richland, Florence, Pearl, Brandon, and South Jackson.",
         "url": "https://church244.com/",
         "telephone": "+1-601-317-1482",
         "logo": "https://church244.com/images/church244-logo-v2.png",
@@ -69,6 +108,13 @@
           "latitude": 32.2200422,
           "longitude": -90.1572158
         },
+        "areaServed": [
+          { "@type": "City", "name": "Richland", "containedInPlace": { "@type": "State", "name": "Mississippi" } },
+          { "@type": "City", "name": "Florence", "containedInPlace": { "@type": "State", "name": "Mississippi" } },
+          { "@type": "City", "name": "Pearl", "containedInPlace": { "@type": "State", "name": "Mississippi" } },
+          { "@type": "City", "name": "Brandon", "containedInPlace": { "@type": "State", "name": "Mississippi" } },
+          { "@type": "City", "name": "Jackson", "containedInPlace": { "@type": "State", "name": "Mississippi" } }
+        ],
         "hasMap": "https://www.google.com/maps/place/Church+244/@32.2200422,-90.1572158,17z",
         "employee": {
           "@type": "Person",
@@ -97,6 +143,7 @@
         ],
         "sameAs": [
           "https://www.facebook.com/p/Church-244-61565615548732/",
+          "https://www.facebook.com/p/Church244-Youth-61565427974687/",
           "https://youtube.com/@church244"
         ]
       },
@@ -104,6 +151,7 @@
         "@type": "WebSite",
         "@id": "https://church244.com/#website",
         "name": "Church 244",
+        "alternateName": "Church 244 Richland MS",
         "url": "https://church244.com/",
         "publisher": {
           "@id": "https://church244.com/#church"
@@ -112,7 +160,7 @@
       {
         "@type": "WebPage",
         "@id": "https://church244.com/#webpage",
-        "name": "Church 244 | Richland, MS — Come As You Are",
+        "name": "Church 244 | Spirit-Filled Church in Richland, MS",
         "url": "https://church244.com/",
         "isPartOf": {
           "@id": "https://church244.com/#website"
@@ -128,18 +176,18 @@
     ]
   }
   </script>
-
-
 </head>
 
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <!-- ═══════════════════════════════════════════ -->
   <!-- NAVIGATION                                  -->
   <!-- ═══════════════════════════════════════════ -->
-  <nav class="nav" id="navbar">
+  <nav class="nav" id="navbar" aria-label="Primary navigation">
     <div class="nav__container">
       <a href="#hero" class="nav__logo">
-        <img src="/images/church244-logo-v2.png" alt="Church 244 - Kingdom Minded" class="nav__logo-img" />
+        <img src="/images/church244-logo-v2.webp" alt="Church 244 - Kingdom Minded" width="100" height="40" class="nav__logo-img" />
       </a>
       <ul class="nav__links" id="navLinks">
         <li><a href="#about" class="nav__link">About</a></li>
@@ -147,11 +195,12 @@
         <li><a href="#sermons" class="nav__link">Sermons</a></li>
         <li><a href="#events" class="nav__link">Events</a></li>
         <li><a href="#pastor" class="nav__link">Leadership</a></li>
-        <li><a href="#ministries" class="nav__link">Ministries</a></li>
-        <li><a href="#visit" class="nav__link">Visit Us</a></li>
+        <li><a href="/ministries" class="nav__link">Ministries</a></li>
+        <li><a href="/prayer" class="nav__link">Prayer</a></li>
+        <li><a href="/plan-your-visit" class="nav__link">Plan Your Visit</a></li>
         <li><a href="https://church244.churchcenter.com/giving/to/general" target="_blank" rel="noopener noreferrer" class="nav__link nav__link--give">Give</a></li>
       </ul>
-      <button class="nav__hamburger" id="hamburger" aria-label="Toggle navigation menu">
+      <button class="nav__hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
         <span></span>
         <span></span>
         <span></span>
@@ -159,736 +208,746 @@
     </div>
   </nav>
 
-  <!-- ═══════════════════════════════════════════ -->
-  <!-- HERO                                        -->
-  <!-- ═══════════════════════════════════════════ -->
-  <section class="hero" id="hero">
-    <div class="hero__bg">
-      <div class="hero__particles" id="heroParticles"></div>
-      <div class="hero__gradient"></div>
-    </div>
-    <div class="hero__content">
-      <p class="hero__eyebrow reveal">129 Center St, Suite F · Richland, MS</p>
-      <h1 class="hero__title reveal">
-        <span class="hero__title-line">You Belong</span>
-        <span class="hero__title-line hero__title-line--accent">Here.</span>
-      </h1>
-      <p class="hero__subtitle reveal">
-        A Christ-centered, Spirit-filled community where you're not just welcome — you're <em>family</em>.
-      </p>
-      <div class="hero__actions reveal">
-        <a href="#visit" class="btn btn--primary">Plan Your Visit</a>
-        <a href="#services" class="btn btn--ghost">Service Times</a>
+  <main id="main-content">
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- HERO                                        -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="hero" id="hero">
+      <div class="hero__bg">
+        <div class="hero__particles" id="heroParticles" aria-hidden="true"></div>
+        <div class="hero__gradient"></div>
       </div>
-      <div class="hero__schedule reveal">
-        <div class="hero__schedule-item">
-          <span class="hero__schedule-icon">☀️</span>
-          <div>
-            <strong>Sundays</strong>
-            <span>10:00 AM</span>
-          </div>
-        </div>
-        <div class="hero__schedule-divider"></div>
-        <div class="hero__schedule-item">
-          <span class="hero__schedule-icon">🌙</span>
-          <div>
-            <strong>Wednesdays</strong>
-            <span>6:30 PM</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="hero__scroll">
-      <span>Scroll</span>
-      <div class="hero__scroll-line"></div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════ -->
-  <!-- ABOUT / BELIEFS                             -->
-  <!-- ═══════════════════════════════════════════ -->
-  <section class="about" id="about">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-header__eyebrow">Who We Are</span>
-        <h2 class="section-header__title">More Than a Church.<br/><span class="text-accent">We're Family.</span></h2>
-        <p class="section-header__subtitle">
-          At Church 244, everything we do centers around Jesus Christ and the truth of God's Word. 
-          We're a growing community in Richland, Mississippi, and our doors are always open.
+      <div class="hero__content">
+        <p class="hero__eyebrow reveal">129 Center St, Suite F · Richland, MS</p>
+        <h1 class="hero__title reveal">
+          <span class="hero__title-line">You Belong</span>
+          <span class="hero__title-line hero__title-line--accent">Here.</span>
+        </h1>
+        <p class="hero__subtitle reveal">
+          A Christ-centered, Spirit-filled community in Richland, Mississippi where you're not just welcome — you're <em>family</em>.
         </p>
-      </div>
-      
-      <div class="about__grid">
-        <div class="about__card reveal">
-          <div class="about__card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-          </div>
-          <h3>Rooted in Scripture</h3>
-          <p>We believe in one true God, eternally existing in three persons — Father, Son, and Holy Spirit. The Bible is our foundation for all we do.</p>
+        <div class="hero__actions reveal">
+          <a href="/plan-your-visit" class="btn btn--primary">Plan Your Visit</a>
+          <a href="#services" class="btn btn--ghost">Service Times</a>
         </div>
-        <div class="about__card reveal">
-          <div class="about__card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <div class="hero__schedule reveal">
+          <div class="hero__schedule-item">
+            <span class="hero__schedule-icon" aria-hidden="true">☀️</span>
+            <div>
+              <strong>Sundays</strong>
+              <span>10:00 AM</span>
+            </div>
           </div>
-          <h3>Built on Love</h3>
-          <p>We're not just a Sunday gathering — we're a family that walks through life together. You'll find genuine connection and people who truly care.</p>
-        </div>
-        <div class="about__card reveal">
-          <div class="about__card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <div class="hero__schedule-divider" aria-hidden="true"></div>
+          <div class="hero__schedule-item">
+            <span class="hero__schedule-icon" aria-hidden="true">🌙</span>
+            <div>
+              <strong>Wednesdays</strong>
+              <span>6:30 PM</span>
+            </div>
           </div>
-          <h3>Spirit-Led Worship</h3>
-          <p>Our worship isn't a performance — it's a posture. Come expecting to encounter God's presence in a real and powerful way every single service.</p>
         </div>
       </div>
-    </div>
-  </section>
+      <div class="hero__scroll" aria-hidden="true">
+        <span>Scroll</span>
+        <div class="hero__scroll-line"></div>
+      </div>
+    </section>
 
-  <!-- ═══════════════════════════════════════════ -->
-  <!-- SERVICE TIMES                               -->
-  <!-- ═══════════════════════════════════════════ -->
-  <section class="services" id="services">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-header__eyebrow">Gather With Us</span>
-        <h2 class="section-header__title">Service <span class="text-accent">Times</span></h2>
-      </div>
-      
-      <div class="services__grid">
-        <div class="services__card reveal">
-          <div class="services__card-glow"></div>
-          <div class="services__card-content">
-            <div class="services__card-day">Sunday</div>
-            <div class="services__card-time">10:00 AM</div>
-            <div class="services__card-label">Morning Worship</div>
-            <p class="services__card-desc">Our main gathering. Come experience powerful worship, anointed preaching, and the warmth of community.</p>
-            <div class="services__card-duration">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              10:00 – 11:30 AM
-            </div>
-          </div>
-        </div>
-        
-        <div class="services__card services__card--featured reveal">
-          <div class="services__card-badge">Midweek</div>
-          <div class="services__card-glow"></div>
-          <div class="services__card-content">
-            <div class="services__card-day">Wednesday</div>
-            <div class="services__card-time">6:30 PM</div>
-            <div class="services__card-label">Bible Study & Fellowship</div>
-            <p class="services__card-desc">Dig deeper into the Word. Adult Bible study at 7:00 PM with a time of fellowship and prayer to start.</p>
-            <div class="services__card-duration">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              6:30 – 8:00 PM
-            </div>
-          </div>
-        </div>
-        
-        <div class="services__card reveal">
-          <div class="services__card-glow"></div>
-          <div class="services__card-content">
-            <div class="services__card-day">Thursday</div>
-            <div class="services__card-time">6:30 PM</div>
-            <div class="services__card-label">Youth Group</div>
-            <p class="services__card-desc">Ages 13–19. A vibrant, high-energy gathering where teens encounter Jesus, build friendships, and grow in faith.</p>
-            <div class="services__card-duration">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              6:30 – 8:00 PM
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════ -->
-  <!-- LEADERSHIP                                  -->
-  <!-- ═══════════════════════════════════════════ -->
-  <section class="pastor" id="pastor">
-    <div class="container">
-      <!-- Pastor Josh Watts -->
-      <div class="pastor__layout">
-        <div class="pastor__image-wrapper reveal">
-          <div class="pastor__image-frame">
-            <img src="/images/pastor-josh-jeanette.jpg" alt="Pastor Josh Watts and his wife Jeanette" loading="lazy" />
-          </div>
-          <div class="pastor__image-accent"></div>
-        </div>
-        <div class="pastor__content reveal">
-          <span class="section-header__eyebrow">Our Pastor</span>
-          <h2 class="section-header__title">Josh <span class="text-accent">Watts</span></h2>
-          <blockquote class="pastor__quote">
-            "I love this place and these people. They are like my family! Pastor Josh Watts is a mighty man of God. He incorporates the Lord into every aspect of life and is a great leader who follows Jesus and leads others to Him."
-          </blockquote>
-          <p class="pastor__bio">
-            Pastor Josh is a devoted husband to Jeanette, father to Joshua and Alana, and "Pop" to Ripley. 
-            His heart burns for one thing — helping people encounter the living God and discover their purpose in Jesus Christ.
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- ABOUT / BELIEFS                             -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="about" id="about">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-header__eyebrow">Who We Are</span>
+          <h2 class="section-header__title">More Than a Church.<br/><span class="text-accent">We're Family.</span></h2>
+          <p class="section-header__subtitle">
+            At Church 244, everything we do centers around Jesus Christ and the truth of God's Word.
+            We're a growing community in Richland, Mississippi — serving families from Richland, Florence, Pearl, Brandon, and South Jackson — and our doors are always open.
           </p>
-          <p class="pastor__bio">
-            Under his leadership, Church 244 has become a place where lives are transformed, 
-            families are restored, and the community is impacted with the love of Christ.
-          </p>
-          <div class="pastor__social">
-            <a href="https://www.facebook.com/josh.watts.56/" target="_blank" rel="noopener noreferrer" class="pastor__social-link" aria-label="Pastor Josh on Facebook">
-              <svg viewBox="0 0 24 24" fill="currentColor" width="20"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-            </a>
-            <a href="https://youtube.com/@church244" target="_blank" rel="noopener noreferrer" class="pastor__social-link" aria-label="Church 244 on YouTube">
-              <svg viewBox="0 0 24 24" fill="currentColor" width="20"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-            </a>
-          </div>
         </div>
-      </div>
 
-      <!-- Leadership Bento Grid -->
-      <div class="leadership__divider reveal">
-        <span class="section-header__eyebrow">Church Leadership</span>
-        <h3 class="leadership__heading">Meet Our <span class="text-accent">Team</span></h3>
-      </div>
-      
-      <div class="leadership__bento reveal">
-        <div class="leadership__card leadership__card--wide">
-          <img src="/images/leadership-nick-amy-hare.webp" alt="Nick and Amy Hare — Praise and Worship Leaders" loading="lazy" />
-          <div class="leadership__card-overlay">
-            <h4 class="leadership__card-name">Nick & Amy Hare</h4>
-            <span class="leadership__card-role">Praise & Worship Leaders</span>
-          </div>
-        </div>
-        <div class="leadership__card">
-          <img src="/images/leadership-nick-shanna-weeks.webp" alt="Nick and Shanna Weeks — Youth Pastor and Wife" loading="lazy" />
-          <div class="leadership__card-overlay">
-            <h4 class="leadership__card-name">Nick & Shanna Weeks</h4>
-            <span class="leadership__card-role">Youth Pastor & Wife</span>
-          </div>
-        </div>
-        <div class="leadership__card">
-          <img src="/images/leadership-london-andrew-perkins.webp" alt="London and Andrew Perkins — Children's Minister and Husband" loading="lazy" />
-          <div class="leadership__card-overlay">
-            <h4 class="leadership__card-name">London & Andrew Perkins</h4>
-            <span class="leadership__card-role">Children's Minister & Husband</span>
-          </div>
-        </div>
-        <div class="leadership__card leadership__card--wide">
-          <img src="/images/leadership-matthew-lexi-owens.webp" alt="Matthew and Lexie Owens — Men's and Women's Ministers" loading="lazy" />
-          <div class="leadership__card-overlay">
-            <h4 class="leadership__card-name">Matthew & Lexie Owens</h4>
-            <span class="leadership__card-role">Men's & Women's Ministry</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════ -->
-  <!-- SERMONS ARCHIVE                             -->
-  <!-- ═══════════════════════════════════════════ -->
-  <section class="sermons" id="sermons">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-header__eyebrow">Watch & Listen</span>
-        <h2 class="section-header__title">Latest <span class="text-accent">Sermons</span></h2>
-        <p class="section-header__subtitle">Catch up on what God is speaking through Church 244. New messages every week.</p>
-      </div>
-      
-      <div class="sermons__carousel">
-        <button class="sermons__arrow sermons__arrow--prev" id="sermonsPrev" aria-label="Previous sermons">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24"><polyline points="15 18 9 12 15 6"/></svg>
-        </button>
-        <div class="sermons__track" id="sermonsGrid">
-          <!-- Skeleton loaders -->
-          <div class="sermons__skeleton"><div class="sermons__skeleton-thumb"></div><div class="sermons__skeleton-text"></div><div class="sermons__skeleton-text sermons__skeleton-text--short"></div></div>
-          <div class="sermons__skeleton"><div class="sermons__skeleton-thumb"></div><div class="sermons__skeleton-text"></div><div class="sermons__skeleton-text sermons__skeleton-text--short"></div></div>
-          <div class="sermons__skeleton"><div class="sermons__skeleton-thumb"></div><div class="sermons__skeleton-text"></div><div class="sermons__skeleton-text sermons__skeleton-text--short"></div></div>
-        </div>
-        <button class="sermons__arrow sermons__arrow--next" id="sermonsNext" aria-label="Next sermons">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-      </div>
-      
-      <div class="sermons__footer reveal">
-        <a href="https://youtube.com/@church244" target="_blank" rel="noopener noreferrer" class="btn btn--ghost">
-          <svg viewBox="0 0 24 24" fill="currentColor" width="20"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-          View All Sermons on YouTube →
-        </a>
-      </div>
-
-    </div>
-
-    <!-- Video Modal -->
-    <div class="sermons__modal" id="sermonModal">
-      <div class="sermons__modal-backdrop" id="sermonModalBackdrop"></div>
-      <div class="sermons__modal-content">
-        <button class="sermons__modal-close" id="sermonModalClose" aria-label="Close video">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        </button>
-        <div class="sermons__modal-video">
-          <iframe id="sermonIframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <h3 class="sermons__modal-title" id="sermonModalTitle"></h3>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════ -->
-  <!-- UPCOMING EVENTS                             -->
-  <!-- ═══════════════════════════════════════════ -->
-  <section class="events" id="events">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-header__eyebrow">What's Happening</span>
-        <h2 class="section-header__title">Upcoming <span class="text-accent">Events</span></h2>
-        <p class="section-header__subtitle">Don't miss what God is doing. Get connected and join us.</p>
-      </div>
-      
-      <div class="events__grid" id="eventsGrid">
-        <!-- Events injected by JS -->
-        <div class="events__empty" id="eventsEmpty" style="display:none;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="48"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          <h3>No Upcoming Events</h3>
-          <p>Check back soon — something great is always in the works.</p>
-        </div>
-      </div>
-      
-      <div class="events__footer reveal">
-        <a href="https://church244.churchcenter.com/registrations" target="_blank" rel="noopener noreferrer" class="btn btn--ghost">
-          View All Events on Church Center →
-        </a>
-      </div>
-    </div>
-  </section>
-
-
-
-
-  <!-- ═══════════════════════════════════════════ -->
-  <!-- YOUTH MINISTRY                              -->
-  <!-- ═══════════════════════════════════════════ -->
-  <section class="youth" id="youth">
-    <div class="container">
-      <div class="youth__layout">
-        <div class="youth__content reveal">
-          <span class="section-header__eyebrow">Ages 13–19</span>
-          <h2 class="section-header__title">Church 244 <span class="text-accent">Youth</span></h2>
-          <p class="youth__desc">
-            Our youth ministry is a place where the next generation discovers who they are in Christ. 
-            Every Thursday at 6:30 PM, teens gather for worship, the Word, and real community.
-          </p>
-          <div class="youth__stats">
-            <div class="youth__stat">
-              <span class="youth__stat-number">THU</span>
-              <span class="youth__stat-label">Every Thursday</span>
+        <div class="about__grid">
+          <div class="about__card reveal">
+            <div class="about__card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
             </div>
-            <div class="youth__stat">
-              <span class="youth__stat-number">6:30</span>
-              <span class="youth__stat-label">PM Start</span>
-            </div>
+            <h3>Rooted in Scripture</h3>
+            <p>We believe in one true God, eternally existing in three persons — Father, Son, and Holy Spirit. The Bible is our foundation for all we do.</p>
           </div>
-          <a href="https://www.facebook.com/p/Church244-Youth-61565427974687/" target="_blank" rel="noopener noreferrer" class="btn btn--primary">
-            Follow Youth on Facebook →
-          </a>
-        </div>
-        <div class="youth__visual reveal">
-          <div class="youth__card-stack">
-            <div class="youth__floating-card youth__floating-card--1">
-              <span>🎵</span> Worship Nights
+          <div class="about__card reveal">
+            <div class="about__card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
             </div>
-            <div class="youth__floating-card youth__floating-card--2">
-              <span>📖</span> Bible Study
+            <h3>Built on Love</h3>
+            <p>We're not just a Sunday gathering — we're a family that walks through life together. You'll find genuine connection and people who truly care.</p>
+          </div>
+          <div class="about__card reveal">
+            <div class="about__card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
             </div>
-            <div class="youth__floating-card youth__floating-card--3">
-              <span>🤝</span> Real Community
-            </div>
-            <div class="youth__floating-card youth__floating-card--4">
-              <span>🎉</span> Events & Fun
-            </div>
+            <h3>Spirit-Led Worship</h3>
+            <p>Our worship isn't a performance — it's a posture. Come expecting to encounter God's presence in a real and powerful way every single service.</p>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ═══════════════════════════════════════════ -->
-  <!-- COMMUNITY / HIGHLIGHTS                      -->
-  <!-- ═══════════════════════════════════════════ -->
-  <section class="community" id="community">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-header__eyebrow">Life at Church 244</span>
-        <h2 class="section-header__title">The Lord Is <span class="text-accent">Moving</span></h2>
-        <p class="section-header__subtitle">Real people. Real stories. Real transformation.</p>
-      </div>
-      
-      <div class="community__grid">
-        <div class="community__item community__item--large reveal">
-          <div class="community__item-bg community__item-bg--baptism"></div>
-          <div class="community__item-content">
-            <span class="community__item-tag">Baptisms</span>
-            <h3>11 Baptisms in One Sunday</h3>
-            <p>"The Lord is moving!" — lives transformed, declaring faith publicly.</p>
-          </div>
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- SERVICE TIMES                               -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="services" id="services">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-header__eyebrow">Gather With Us</span>
+          <h2 class="section-header__title">Service <span class="text-accent">Times</span></h2>
         </div>
-        <div class="community__item reveal">
-          <div class="community__item-bg community__item-bg--testimony"></div>
-          <div class="community__item-content">
-            <span class="community__item-tag">Testimony Nights</span>
-            <h3>Stories of Grace</h3>
-            <p>Hear real stories of how God is working in the lives of our church family.</p>
-          </div>
-        </div>
-        <div class="community__item reveal">
-          <div class="community__item-bg community__item-bg--events"></div>
-          <div class="community__item-content">
-            <span class="community__item-tag">Community Events</span>
-            <h3>Trunk or Treat & More</h3>
-            <p>Family-friendly events that bring the whole community together.</p>
-          </div>
-        </div>
-        <div class="community__item community__item--wide reveal">
-          <div class="community__item-bg community__item-bg--worship"></div>
-          <div class="community__item-content">
-            <span class="community__item-tag">Sunday Worship</span>
-            <h3>Come Expecting to Encounter God</h3>
-            <p>Every Sunday at 10 AM, we gather to praise the King who died for us.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ═══════════════════════════════════════════ -->
-  <!-- VISIT US / CONTACT                          -->
-  <!-- ═══════════════════════════════════════════ -->
-  <section class="visit" id="visit">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-header__eyebrow">We'd Love to See You</span>
-        <h2 class="section-header__title">Plan Your <span class="text-accent">Visit</span></h2>
-        <p class="section-header__subtitle">
-          Whether it's your first time or you're coming back, you're always welcome at Church 244.
-        </p>
-      </div>
-      
-      <div class="visit__layout">
-        <div class="visit__info reveal">
-          <div class="visit__info-card">
-            <div class="visit__info-item">
-              <div class="visit__info-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              </div>
-              <div>
-                <h4>Address</h4>
-                <p>129 Center St, Suite F<br/>Richland, MS 39218</p>
-              </div>
-            </div>
-            <div class="visit__info-item">
-              <div class="visit__info-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-              </div>
-              <div>
-                <h4>Phone</h4>
-                <p><a href="tel:+16013171482">(601) 317-1482</a></p>
-              </div>
-            </div>
-            <div class="visit__info-item">
-              <div class="visit__info-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              </div>
-              <div>
-                <h4>Service Times</h4>
-                <p>Sundays @ 10:00 AM<br/>Wednesdays @ 6:30 PM<br/>Youth Thursdays @ 6:30 PM</p>
+        <div class="services__grid">
+          <div class="services__card reveal">
+            <div class="services__card-glow"></div>
+            <div class="services__card-content">
+              <div class="services__card-day">Sunday</div>
+              <div class="services__card-time">10:00 AM</div>
+              <div class="services__card-label">Morning Worship</div>
+              <p class="services__card-desc">Our main gathering. Come experience powerful worship, anointed preaching, Children's Ministry, and the warmth of community.</p>
+              <div class="services__card-duration">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                10:00 – 11:30 AM
               </div>
             </div>
           </div>
-          
-          <div class="visit__expect">
-            <h3>What to Expect</h3>
-            <ul class="visit__expect-list">
-              <li>
-                <span class="visit__expect-icon">👋</span>
-                <div>
-                  <strong>A Warm Welcome</strong>
-                  <p>You'll be greeted with genuine smiles — not just a handshake.</p>
-                </div>
-              </li>
-              <li>
-                <span class="visit__expect-icon">🎵</span>
-                <div>
-                  <strong>Powerful Worship</strong>
-                  <p>Contemporary worship that ushers you into God's presence.</p>
-                </div>
-              </li>
-              <li>
-                <span class="visit__expect-icon">📖</span>
-                <div>
-                  <strong>Biblical Teaching</strong>
-                  <p>Relevant, scripture-centered messages you can apply to everyday life.</p>
-                </div>
-              </li>
-              <li>
-                <span class="visit__expect-icon">👨‍👩‍👧‍👦</span>
-                <div>
-                  <strong>Come As You Are</strong>
-                  <p>No dress code. No judgment. Just come.</p>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-        
-        <div class="visit__map reveal">
-          <div class="visit__map-wrapper">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1724.5!2d-90.1572158!3d32.2200422!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x862831001a75a299%3A0x3f2087d46f67c9f!2sChurch%20244!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
-              width="100%"
-              height="100%"
-              style="border:0;"
-              allowfullscreen=""
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              title="Church 244 Location Map"
-            ></iframe>
-          </div>
-          <a href="https://www.google.com/maps/place/Church+244/@32.2200422,-90.1572158,17z" target="_blank" rel="noopener noreferrer" class="btn btn--primary visit__directions-btn">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
-            Get Directions
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ═══════════════════════════════════════════ -->
-  <!-- MINISTRIES                                 -->
-  <!-- ═══════════════════════════════════════════ -->
-  <section class="ministries" id="ministries">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-header__eyebrow">Get Connected</span>
-        <h2 class="section-header__title">Our <span class="text-accent">Ministries</span></h2>
-        <p class="section-header__subtitle">There's a place for everyone at Church 244. Find your community.</p>
-      </div>
-      
-      <div class="ministries__grid">
-        <div class="ministries__card reveal">
-          <div class="ministries__card-image">
-            <img src="/images/mens-group.jpg" alt="Church 244 Men's Ministry" loading="lazy" />
+          <div class="services__card services__card--featured reveal">
+            <div class="services__card-badge">Midweek</div>
+            <div class="services__card-glow"></div>
+            <div class="services__card-content">
+              <div class="services__card-day">Wednesday</div>
+              <div class="services__card-time">6:30 PM</div>
+              <div class="services__card-label">Bible Study &amp; Fellowship</div>
+              <p class="services__card-desc">Dig deeper into the Word. Fellowship and prayer begin at 6:30 PM with Adult Bible Study starting at 7:00 PM.</p>
+              <div class="services__card-duration">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                6:30 – 8:00 PM
+              </div>
+            </div>
           </div>
-          <div class="ministries__card-body">
-            <span class="ministries__card-tag">Men</span>
-            <h3>Men of God Monday</h3>
-            <p>Iron sharpens iron. Our men gather to grow in faith, build brotherhood, and become the husbands, fathers, and leaders God called them to be.</p>
-          </div>
-        </div>
-        <div class="ministries__card reveal">
-          <div class="ministries__card-image">
-            <img src="/images/womens-ministry.jpg" alt="Church 244 Women's Ministry" loading="lazy" />
-          </div>
-          <div class="ministries__card-body">
-            <span class="ministries__card-tag">Women</span>
-            <h3>Women's Ministry</h3>
-            <p>A sisterhood rooted in Christ. Our women encourage, uplift, and walk through life together — because you were never meant to do this alone.</p>
-          </div>
-        </div>
-        <div class="ministries__card reveal">
-          <div class="ministries__card-image">
-            <img src="/images/easter-event.jpg" alt="Church 244 Community Outreach" loading="lazy" />
-          </div>
-          <div class="ministries__card-body">
-            <span class="ministries__card-tag">Outreach</span>
-            <h3>Community Outreach</h3>
-            <p>From Easter egg hunts to trunk-or-treat, we love serving Richland. The church isn't a building — it's people showing up for their neighbors.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ═══════════════════════════════════════════ -->
-  <!-- PHOTO GALLERY                              -->
-  <!-- ═══════════════════════════════════════════ -->
-  <section class="gallery" id="gallery">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-header__eyebrow">See It for Yourself</span>
-        <h2 class="section-header__title">Life at <span class="text-accent">Church 244</span></h2>
-      </div>
-    </div>
-    <div class="gallery__track-wrapper">
-      <div class="gallery__track" id="galleryTrack1">
-        <div class="gallery__item"><img src="/images/worship-hero.jpg" alt="Sunday worship" loading="lazy" /></div>
-        <div class="gallery__item"><img src="/images/baptism.jpg" alt="Baptism Sunday" loading="lazy" /></div>
-        <div class="gallery__item"><img src="/images/mens-group.jpg" alt="Men's Group" loading="lazy" /></div>
-        <div class="gallery__item"><img src="/images/trunk-or-treat.jpg" alt="Trunk or Treat" loading="lazy" /></div>
-        <div class="gallery__item"><img src="/images/church-family.jpg" alt="Church family" loading="lazy" /></div>
-        <div class="gallery__item"><img src="/images/easter-event.jpg" alt="Easter event" loading="lazy" /></div>
-        <div class="gallery__item"><img src="/images/prayer.jpg" alt="Prayer and worship" loading="lazy" /></div>
-        <div class="gallery__item"><img src="/images/community-event.jpg" alt="Community event" loading="lazy" /></div>
-        <!-- Duplicated for seamless infinite scroll -->
-        <div class="gallery__item"><img src="/images/worship-hero.jpg" alt="Sunday worship" loading="lazy" /></div>
-        <div class="gallery__item"><img src="/images/baptism.jpg" alt="Baptism Sunday" loading="lazy" /></div>
-        <div class="gallery__item"><img src="/images/mens-group.jpg" alt="Men's Group" loading="lazy" /></div>
-        <div class="gallery__item"><img src="/images/trunk-or-treat.jpg" alt="Trunk or Treat" loading="lazy" /></div>
-        <div class="gallery__item"><img src="/images/church-family.jpg" alt="Church family" loading="lazy" /></div>
-        <div class="gallery__item"><img src="/images/easter-event.jpg" alt="Easter event" loading="lazy" /></div>
-        <div class="gallery__item"><img src="/images/prayer.jpg" alt="Prayer and worship" loading="lazy" /></div>
-        <div class="gallery__item"><img src="/images/community-event.jpg" alt="Community event" loading="lazy" /></div>
-      </div>
-      <div class="gallery__track gallery__track--reverse" id="galleryTrack2">
-        <div class="gallery__item"><img src="/images/womens-ministry.jpg" alt="Women's Ministry" loading="lazy" /></div>
-        <div class="gallery__item"><img src="/images/worship-crowd.jpg" alt="Worship crowd" loading="lazy" /></div>
-        <div class="gallery__item"><img src="/images/outreach-booth.jpg" alt="Outreach booth" loading="lazy" /></div>
-        <div class="gallery__item"><img src="/images/testimony-night.jpg" alt="Testimony night" loading="lazy" /></div>
-        <div class="gallery__item"><img src="/images/youth-outing.jpg" alt="Youth outing" loading="lazy" /></div>
-        <div class="gallery__item"><img src="/images/easter-group.jpg" alt="Easter group photo" loading="lazy" /></div>
-        <div class="gallery__item"><img src="/images/worship-service.jpg" alt="Worship service" loading="lazy" /></div>
-        <div class="gallery__item"><img src="/images/family-event.jpg" alt="Family event" loading="lazy" /></div>
-        <!-- Duplicated for seamless infinite scroll -->
-        <div class="gallery__item"><img src="/images/womens-ministry.jpg" alt="Women's Ministry" loading="lazy" /></div>
-        <div class="gallery__item"><img src="/images/worship-crowd.jpg" alt="Worship crowd" loading="lazy" /></div>
-        <div class="gallery__item"><img src="/images/outreach-booth.jpg" alt="Outreach booth" loading="lazy" /></div>
-        <div class="gallery__item"><img src="/images/testimony-night.jpg" alt="Testimony night" loading="lazy" /></div>
-        <div class="gallery__item"><img src="/images/youth-outing.jpg" alt="Youth outing" loading="lazy" /></div>
-        <div class="gallery__item"><img src="/images/easter-group.jpg" alt="Easter group photo" loading="lazy" /></div>
-        <div class="gallery__item"><img src="/images/worship-service.jpg" alt="Worship service" loading="lazy" /></div>
-        <div class="gallery__item"><img src="/images/family-event.jpg" alt="Family event" loading="lazy" /></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════ -->
-  <!-- GIVING                                      -->
-  <!-- ═══════════════════════════════════════════ -->
-  <section class="giving" id="giving">
-    <div class="container">
-      <div class="giving__layout">
-        <div class="giving__content reveal">
-          <span class="section-header__eyebrow">Support the Mission</span>
-          <h2 class="section-header__title">Generosity Changes <span class="text-accent">Everything</span></h2>
-          <p class="giving__desc">
-            Your generosity fuels the mission of Church 244 — from reaching our community to discipling the next generation. 
-            Every gift makes a Kingdom impact.
-          </p>
-          <blockquote class="giving__verse">
-            "Each of you should give what you have decided in your heart to give, not reluctantly or under compulsion, for God loves a cheerful giver."
-            <cite>— 2 Corinthians 9:7</cite>
-          </blockquote>
-          <a href="https://church244.churchcenter.com/giving/to/general" target="_blank" rel="noopener noreferrer" class="btn btn--give btn--large">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            Give Online via Church Center
-          </a>
-        </div>
-        <div class="giving__visual reveal">
-          <div class="giving__card">
-            <div class="giving__card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="48">
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-              </svg>
+          <div class="services__card reveal">
+            <div class="services__card-glow"></div>
+            <div class="services__card-content">
+              <div class="services__card-day">Thursday</div>
+              <div class="services__card-time">6:30 PM</div>
+              <div class="services__card-label">Youth Group</div>
+              <p class="services__card-desc">Ages 13–19. A vibrant, high-energy gathering where teens encounter Jesus, build friendships, and grow in faith.</p>
+              <div class="services__card-duration">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                6:30 – 8:00 PM
+              </div>
             </div>
-            <h3>Ways to Give</h3>
-            <ul class="giving__ways">
-              <li>
-                <span class="giving__way-icon">💻</span>
-                <div><strong>Online</strong><p>Quick, secure giving through Church Center</p></div>
-              </li>
-              <li>
-                <span class="giving__way-icon">🏛️</span>
-                <div><strong>In Person</strong><p>Drop your offering during any Sunday service</p></div>
-              </li>
-              <li>
-                <span class="giving__way-icon">📱</span>
-                <div><strong>Church Center App</strong><p>Set up recurring gifts on the go</p></div>
-              </li>
-            </ul>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ═══════════════════════════════════════════ -->
-  <!-- CONTACT / PRAYER REQUEST                    -->
-  <!-- ═══════════════════════════════════════════ -->
-  <section class="contact" id="contact">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-header__eyebrow">Get in Touch</span>
-        <h2 class="section-header__title">Contact <span class="text-accent">Us</span></h2>
-        <p class="section-header__subtitle">Have a question, a prayer request, or just want to say hello? We'd love to hear from you.</p>
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- LEADERSHIP                                  -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="pastor" id="pastor">
+      <div class="container">
+        <!-- Pastor Josh Watts -->
+        <div class="pastor__layout">
+          <div class="pastor__image-wrapper reveal">
+            <div class="pastor__image-frame">
+              <img src="/images/pastor-josh-jeanette.webp" alt="Pastor Josh Watts and his wife Jeanette at Church 244" width="1280" height="960" loading="lazy" decoding="async" />
+            </div>
+            <div class="pastor__image-accent" aria-hidden="true"></div>
+          </div>
+          <div class="pastor__content reveal">
+            <span class="section-header__eyebrow">Our Pastor</span>
+            <h2 class="section-header__title">Josh <span class="text-accent">Watts</span></h2>
+            <blockquote class="pastor__quote">
+              "I love this place and these people. They are like my family! Pastor Josh Watts is a mighty man of God. He incorporates the Lord into every aspect of life and is a great leader who follows Jesus and leads others to Him."
+            </blockquote>
+            <p class="pastor__bio">
+              Pastor Josh is a devoted husband to Jeanette, father to Joshua and Alana, and "Pop" to Ripley.
+              His heart burns for one thing — helping people encounter the living God and discover their purpose in Jesus Christ.
+            </p>
+            <p class="pastor__bio">
+              Under his leadership, Church 244 has become a place where lives are transformed,
+              families are restored, and Richland and Rankin County are impacted with the love of Christ.
+            </p>
+            <div class="pastor__social">
+              <a href="https://www.facebook.com/josh.watts.56/" target="_blank" rel="noopener noreferrer" class="pastor__social-link" aria-label="Pastor Josh on Facebook">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              </a>
+              <a href="https://youtube.com/@church244" target="_blank" rel="noopener noreferrer" class="pastor__social-link" aria-label="Church 244 on YouTube">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Leadership Bento Grid -->
+        <div class="leadership__divider reveal">
+          <span class="section-header__eyebrow">Church Leadership</span>
+          <h3 class="leadership__heading">Meet Our <span class="text-accent">Team</span></h3>
+        </div>
+
+        <div class="leadership__bento reveal">
+          <div class="leadership__card leadership__card--wide">
+            <img src="/images/leadership-nick-amy-hare.webp" alt="Nick and Amy Hare — Praise and Worship Leaders" width="2048" height="1536" loading="lazy" decoding="async" />
+            <div class="leadership__card-overlay">
+              <h4 class="leadership__card-name">Nick &amp; Amy Hare</h4>
+              <span class="leadership__card-role">Praise &amp; Worship Leaders</span>
+            </div>
+          </div>
+          <div class="leadership__card">
+            <img src="/images/leadership-nick-shanna-weeks.webp" alt="Nick and Shanna Weeks — Youth Pastor and Wife" width="1365" height="1366" loading="lazy" decoding="async" />
+            <div class="leadership__card-overlay">
+              <h4 class="leadership__card-name">Nick &amp; Shanna Weeks</h4>
+              <span class="leadership__card-role">Youth Pastor &amp; Wife</span>
+            </div>
+          </div>
+          <div class="leadership__card">
+            <img src="/images/leadership-london-andrew-perkins.webp" alt="London and Andrew Perkins — Children's Minister and Husband" width="960" height="960" loading="lazy" decoding="async" />
+            <div class="leadership__card-overlay">
+              <h4 class="leadership__card-name">London &amp; Andrew Perkins</h4>
+              <span class="leadership__card-role">Children's Minister &amp; Husband</span>
+            </div>
+          </div>
+          <div class="leadership__card leadership__card--wide">
+            <img src="/images/leadership-matthew-lexi-owens.webp" alt="Matthew and Lexie Owens — Men's and Women's Ministers" width="960" height="960" loading="lazy" decoding="async" />
+            <div class="leadership__card-overlay">
+              <h4 class="leadership__card-name">Matthew &amp; Lexie Owens</h4>
+              <span class="leadership__card-role">Men's &amp; Women's Ministry</span>
+            </div>
+          </div>
+        </div>
       </div>
-      
-      <div class="contact__layout">
-        <form class="contact__form reveal" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contactForm">
-          <input type="hidden" name="form-name" value="contact" />
-          <p class="contact__honeypot" style="display:none;"><label>Don't fill this out: <input name="bot-field" /></label></p>
-          
-          <div class="contact__form-row">
-            <div class="contact__field">
-              <label for="contact-name" class="contact__label">Name</label>
-              <input type="text" id="contact-name" name="name" required class="contact__input" placeholder="Your full name" />
-            </div>
-            <div class="contact__field">
-              <label for="contact-email" class="contact__label">Email</label>
-              <input type="email" id="contact-email" name="email" required class="contact__input" placeholder="you@example.com" />
-            </div>
-          </div>
-          
-          <div class="contact__form-row">
-            <div class="contact__field">
-              <label for="contact-phone" class="contact__label">Phone <span class="contact__optional">(optional)</span></label>
-              <input type="tel" id="contact-phone" name="phone" class="contact__input" placeholder="(601) 555-0123" />
-            </div>
-            <div class="contact__field">
-              <label for="contact-type" class="contact__label">Request Type</label>
-              <select id="contact-type" name="type" required class="contact__input contact__select">
-                <option value="" disabled selected>Choose one...</option>
-                <option value="general">General Question</option>
-                <option value="prayer">Prayer Request</option>
-                <option value="visitor">First-Time Visitor</option>
-                <option value="volunteer">I Want to Volunteer</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
-          </div>
-          
-          <div class="contact__field">
-            <label for="contact-message" class="contact__label">Message</label>
-            <textarea id="contact-message" name="message" required class="contact__input contact__textarea" placeholder="How can we help you?" rows="5"></textarea>
-          </div>
-          
-          <button type="submit" class="btn btn--primary btn--large contact__submit" id="contactSubmit">
-            <span class="contact__submit-text">Send Message</span>
-            <span class="contact__submit-loading" style="display:none;">
-              <svg class="contact__spinner" viewBox="0 0 24 24" width="20"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="30 70" /></svg>
-              Sending...
-            </span>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- SERMONS ARCHIVE                             -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="sermons" id="sermons">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-header__eyebrow">Watch &amp; Listen</span>
+          <h2 class="section-header__title">Latest <span class="text-accent">Sermons</span></h2>
+          <p class="section-header__subtitle">Catch up on what God is speaking through Church 244. New messages every week.</p>
+        </div>
+
+        <div class="sermons__carousel">
+          <button class="sermons__arrow sermons__arrow--prev" id="sermonsPrev" aria-label="Previous sermons">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
           </button>
-        </form>
-        
-        <div class="contact__success" id="contactSuccess" style="display:none;">
-          <div class="contact__success-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="48"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <div class="sermons__track" id="sermonsGrid">
+            <!-- Skeleton loaders -->
+            <div class="sermons__skeleton"><div class="sermons__skeleton-thumb"></div><div class="sermons__skeleton-text"></div><div class="sermons__skeleton-text sermons__skeleton-text--short"></div></div>
+            <div class="sermons__skeleton"><div class="sermons__skeleton-thumb"></div><div class="sermons__skeleton-text"></div><div class="sermons__skeleton-text sermons__skeleton-text--short"></div></div>
+            <div class="sermons__skeleton"><div class="sermons__skeleton-thumb"></div><div class="sermons__skeleton-text"></div><div class="sermons__skeleton-text sermons__skeleton-text--short"></div></div>
           </div>
-          <h3>Message Sent!</h3>
-          <p>Thank you for reaching out. We'll get back to you as soon as we can.</p>
+          <button class="sermons__arrow sermons__arrow--next" id="sermonsNext" aria-label="Next sermons">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ═══════════════════════════════════════════ -->
-  <!-- CALL TO ACTION BANNER                       -->
-  <!-- ═══════════════════════════════════════════ -->
-  <section class="cta">
-    <div class="container">
-      <div class="cta__content reveal">
-        <h2>Join Us This Sunday</h2>
-        <p>There's a seat with your name on it. Come experience what God is doing at Church 244.</p>
-        <div class="cta__actions">
-          <a href="tel:+16013171482" class="btn btn--primary btn--large">Call Us: (601) 317-1482</a>
-          <a href="https://www.facebook.com/p/Church-244-61565615548732/" target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--large">Follow on Facebook</a>
+        <div class="sermons__footer reveal">
+          <a href="https://youtube.com/@church244" target="_blank" rel="noopener noreferrer" class="btn btn--ghost">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            View All Sermons on YouTube →
+          </a>
         </div>
       </div>
-    </div>
-  </section>
+
+      <!-- Video Modal -->
+      <div class="sermons__modal" id="sermonModal" role="dialog" aria-modal="true" aria-labelledby="sermonModalTitle">
+        <div class="sermons__modal-backdrop" id="sermonModalBackdrop"></div>
+        <div class="sermons__modal-content">
+          <button class="sermons__modal-close" id="sermonModalClose" aria-label="Close video">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+          <div class="sermons__modal-video">
+            <iframe id="sermonIframe" src="about:blank" title="Church 244 Sermon Video Player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <h3 class="sermons__modal-title" id="sermonModalTitle">Sermon Video</h3>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- UPCOMING EVENTS                             -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="events" id="events">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-header__eyebrow">What's Happening</span>
+          <h2 class="section-header__title">Upcoming <span class="text-accent">Events</span></h2>
+          <p class="section-header__subtitle">Don't miss what God is doing. Get connected and join us.</p>
+        </div>
+
+        <div class="events__grid" id="eventsGrid">
+          <!-- Events injected by JS -->
+          <div class="events__empty" id="eventsEmpty" style="display:none;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="48" height="48" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <h3>No Upcoming Events</h3>
+            <p>Check back soon — something great is always in the works.</p>
+          </div>
+        </div>
+
+        <div class="events__footer reveal">
+          <a href="https://church244.churchcenter.com/registrations" target="_blank" rel="noopener noreferrer" class="btn btn--ghost">
+            View All Events on Church Center →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- YOUTH MINISTRY                              -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="youth" id="youth">
+      <div class="container">
+        <div class="youth__layout">
+          <div class="youth__content reveal">
+            <span class="section-header__eyebrow">Ages 13–19</span>
+            <h2 class="section-header__title">Church 244 <span class="text-accent">Youth</span></h2>
+            <p class="youth__desc">
+              Our youth ministry is a place where the next generation discovers who they are in Christ.
+              Every Thursday at 6:30 PM, teens from Richland, Florence, Pearl, and Brandon gather for worship, the Word, and real community.
+            </p>
+            <div class="youth__stats">
+              <div class="youth__stat">
+                <span class="youth__stat-number">THU</span>
+                <span class="youth__stat-label">Every Thursday</span>
+              </div>
+              <div class="youth__stat">
+                <span class="youth__stat-number">6:30</span>
+                <span class="youth__stat-label">PM Start</span>
+              </div>
+            </div>
+            <div class="hero__actions" style="justify-content:flex-start;margin-bottom:0;">
+              <a href="/ministries#youth" class="btn btn--primary">Explore Youth Ministry</a>
+              <a href="https://www.facebook.com/p/Church244-Youth-61565427974687/" target="_blank" rel="noopener noreferrer" class="btn btn--ghost">
+                Youth Facebook →
+              </a>
+            </div>
+          </div>
+          <div class="youth__visual reveal" aria-hidden="true">
+            <div class="youth__card-stack">
+              <div class="youth__floating-card youth__floating-card--1">
+                <span>🎵</span> Worship Nights
+              </div>
+              <div class="youth__floating-card youth__floating-card--2">
+                <span>📖</span> Bible Study
+              </div>
+              <div class="youth__floating-card youth__floating-card--3">
+                <span>🤝</span> Real Community
+              </div>
+              <div class="youth__floating-card youth__floating-card--4">
+                <span>🎉</span> Events &amp; Fun
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- COMMUNITY / HIGHLIGHTS                      -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="community" id="community">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-header__eyebrow">Life at Church 244</span>
+          <h2 class="section-header__title">The Lord Is <span class="text-accent">Moving</span></h2>
+          <p class="section-header__subtitle">Real people. Real stories. Real transformation.</p>
+        </div>
+
+        <div class="community__grid">
+          <div class="community__item community__item--large reveal">
+            <div class="community__item-bg community__item-bg--baptism"></div>
+            <div class="community__item-content">
+              <span class="community__item-tag">Baptisms</span>
+              <h3>11 Baptisms in One Sunday</h3>
+              <p>"The Lord is moving!" — lives transformed, declaring faith publicly.</p>
+            </div>
+          </div>
+          <div class="community__item reveal">
+            <div class="community__item-bg community__item-bg--testimony"></div>
+            <div class="community__item-content">
+              <span class="community__item-tag">Testimony Nights</span>
+              <h3>Stories of Grace</h3>
+              <p>Hear real stories of how God is working in the lives of our church family.</p>
+            </div>
+          </div>
+          <div class="community__item reveal">
+            <div class="community__item-bg community__item-bg--events"></div>
+            <div class="community__item-content">
+              <span class="community__item-tag">Community Events</span>
+              <h3>Trunk or Treat &amp; More</h3>
+              <p>Family-friendly events that bring the whole community together.</p>
+            </div>
+          </div>
+          <div class="community__item community__item--wide reveal">
+            <div class="community__item-bg community__item-bg--worship"></div>
+            <div class="community__item-content">
+              <span class="community__item-tag">Sunday Worship</span>
+              <h3>Come Expecting to Encounter God</h3>
+              <p>Every Sunday at 10 AM, we gather to praise the King who died for us.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- VISIT US / DIRECTIONS                       -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="visit" id="visit">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-header__eyebrow">We'd Love to See You</span>
+          <h2 class="section-header__title">Plan Your <span class="text-accent">Visit</span></h2>
+          <p class="section-header__subtitle">
+            Whether it's your first time or you're coming back, you're always welcome at Church 244 in Richland, MS.
+          </p>
+        </div>
+
+        <div class="visit__layout">
+          <div class="visit__info reveal">
+            <div class="visit__info-card">
+              <div class="visit__info-item">
+                <div class="visit__info-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <div>
+                  <h3>Address</h3>
+                  <p>129 Center St, Suite F<br/>Richland, MS 39218</p>
+                </div>
+              </div>
+              <div class="visit__info-item">
+                <div class="visit__info-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                </div>
+                <div>
+                  <h3>Phone</h3>
+                  <p><a href="tel:+16013171482">(601) 317-1482</a></p>
+                </div>
+              </div>
+              <div class="visit__info-item">
+                <div class="visit__info-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <div>
+                  <h3>Service Times</h3>
+                  <p>Sundays @ 10:00 AM<br/>Wednesdays @ 6:30 PM<br/>Youth Thursdays @ 6:30 PM</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="visit__expect">
+              <h3>What to Expect</h3>
+              <ul class="visit__expect-list">
+                <li>
+                  <span class="visit__expect-icon" aria-hidden="true">👋</span>
+                  <div>
+                    <strong>A Warm Welcome</strong>
+                    <p>You'll be greeted with genuine smiles — not just a handshake.</p>
+                  </div>
+                </li>
+                <li>
+                  <span class="visit__expect-icon" aria-hidden="true">🎵</span>
+                  <div>
+                    <strong>Powerful Worship</strong>
+                    <p>Contemporary worship that ushers you into God's presence.</p>
+                  </div>
+                </li>
+                <li>
+                  <span class="visit__expect-icon" aria-hidden="true">📖</span>
+                  <div>
+                    <strong>Biblical Teaching</strong>
+                    <p>Relevant, scripture-centered messages you can apply to everyday life.</p>
+                  </div>
+                </li>
+                <li>
+                  <span class="visit__expect-icon" aria-hidden="true">👨‍👩‍👧‍👦</span>
+                  <div>
+                    <strong>Come As You Are</strong>
+                    <p>No dress code. Safe Kids &amp; Youth ministries. Just come.</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="visit__map reveal">
+            <div class="visit__map-wrapper">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1724.5!2d-90.1572158!3d32.2200422!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x862831001a75a299%3A0x3f2087d46f67c9f!2sChurch%20244!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+                width="600"
+                height="450"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Church 244 Location Map — 129 Center St Suite F, Richland, MS"
+              ></iframe>
+            </div>
+            <div class="hero__actions" style="justify-content:flex-start;margin-bottom:0;">
+              <a href="https://www.google.com/maps/place/Church+244/@32.2200422,-90.1572158,17z" target="_blank" rel="noopener noreferrer" class="btn btn--primary visit__directions-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" aria-hidden="true"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+                Get Directions
+              </a>
+              <a href="/plan-your-visit" class="btn btn--ghost">First-Time Visitor FAQ →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- MINISTRIES                                  -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="ministries" id="ministries">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-header__eyebrow">Get Connected</span>
+          <h2 class="section-header__title">Our <span class="text-accent">Ministries</span></h2>
+          <p class="section-header__subtitle">There's a place for every generation at Church 244. Find your community.</p>
+        </div>
+
+        <div class="ministries__grid">
+          <div class="ministries__card reveal">
+            <div class="ministries__card-image">
+              <img src="/images/mens-group.webp" alt="Church 244 Men's Ministry in Richland, MS" width="1280" height="960" loading="lazy" decoding="async" />
+            </div>
+            <div class="ministries__card-body">
+              <span class="ministries__card-tag">Men</span>
+              <h3>Men of God Monday</h3>
+              <p>Iron sharpens iron. Our men gather to grow in faith, build brotherhood, and become the husbands, fathers, and leaders God called them to be.</p>
+            </div>
+          </div>
+          <div class="ministries__card reveal">
+            <div class="ministries__card-image">
+              <img src="/images/womens-ministry.webp" alt="Church 244 Women's Ministry in Richland, MS" width="1280" height="960" loading="lazy" decoding="async" />
+            </div>
+            <div class="ministries__card-body">
+              <span class="ministries__card-tag">Women</span>
+              <h3>Women's Ministry</h3>
+              <p>A sisterhood rooted in Christ. Our women encourage, uplift, and walk through life together — because you were never meant to do this alone.</p>
+            </div>
+          </div>
+          <div class="ministries__card reveal">
+            <div class="ministries__card-image">
+              <img src="/images/easter-event.webp" alt="Church 244 Community Outreach in Richland, MS" width="960" height="1280" loading="lazy" decoding="async" />
+            </div>
+            <div class="ministries__card-body">
+              <span class="ministries__card-tag">Kids &amp; Outreach</span>
+              <h3>Children &amp; Community Outreach</h3>
+              <p>From Sunday Children's Ministry to Easter egg hunts and Trunk-or-Treat, we love serving families across Richland, Florence, and Pearl.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-actions reveal">
+          <a href="/ministries" class="btn btn--ghost">Explore All Ministries &amp; Leaders →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- PHOTO GALLERY                               -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="gallery" id="gallery">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-header__eyebrow">See It for Yourself</span>
+          <h2 class="section-header__title">Life at <span class="text-accent">Church 244</span></h2>
+        </div>
+      </div>
+      <div class="gallery__track-wrapper">
+        <div class="gallery__track" id="galleryTrack1">
+          <div class="gallery__item"><img src="/images/worship-hero.webp" alt="Sunday worship at Church 244" width="1280" height="1300" loading="lazy" decoding="async" /></div>
+          <div class="gallery__item"><img src="/images/baptism.webp" alt="Baptism Sunday at Church 244" width="960" height="1280" loading="lazy" decoding="async" /></div>
+          <div class="gallery__item"><img src="/images/mens-group.webp" alt="Men of God Monday fellowship" width="1280" height="960" loading="lazy" decoding="async" /></div>
+          <div class="gallery__item"><img src="/images/trunk-or-treat.webp" alt="Richland Trunk or Treat outreach" width="960" height="1280" loading="lazy" decoding="async" /></div>
+          <div class="gallery__item"><img src="/images/church-family.webp" alt="Church 244 family fellowship" width="960" height="1280" loading="lazy" decoding="async" /></div>
+          <div class="gallery__item"><img src="/images/easter-event.webp" alt="Easter celebration in Richland" width="960" height="1280" loading="lazy" decoding="async" /></div>
+          <div class="gallery__item"><img src="/images/prayer.webp" alt="Altar prayer and worship" width="1280" height="960" loading="lazy" decoding="async" /></div>
+          <div class="gallery__item"><img src="/images/community-event.webp" alt="Community outreach gathering" width="960" height="720" loading="lazy" decoding="async" /></div>
+          <!-- Duplicated for seamless infinite scroll -->
+          <div class="gallery__item" aria-hidden="true"><img src="/images/worship-hero.webp" alt="" width="1280" height="1300" loading="lazy" decoding="async" /></div>
+          <div class="gallery__item" aria-hidden="true"><img src="/images/baptism.webp" alt="" width="960" height="1280" loading="lazy" decoding="async" /></div>
+          <div class="gallery__item" aria-hidden="true"><img src="/images/mens-group.webp" alt="" width="1280" height="960" loading="lazy" decoding="async" /></div>
+          <div class="gallery__item" aria-hidden="true"><img src="/images/trunk-or-treat.webp" alt="" width="960" height="1280" loading="lazy" decoding="async" /></div>
+          <div class="gallery__item" aria-hidden="true"><img src="/images/church-family.webp" alt="" width="960" height="1280" loading="lazy" decoding="async" /></div>
+          <div class="gallery__item" aria-hidden="true"><img src="/images/easter-event.webp" alt="" width="960" height="1280" loading="lazy" decoding="async" /></div>
+          <div class="gallery__item" aria-hidden="true"><img src="/images/prayer.webp" alt="" width="1280" height="960" loading="lazy" decoding="async" /></div>
+          <div class="gallery__item" aria-hidden="true"><img src="/images/community-event.webp" alt="" width="960" height="720" loading="lazy" decoding="async" /></div>
+        </div>
+        <div class="gallery__track gallery__track--reverse" id="galleryTrack2">
+          <div class="gallery__item"><img src="/images/womens-ministry.webp" alt="Church 244 Women's Ministry" width="1280" height="960" loading="lazy" decoding="async" /></div>
+          <div class="gallery__item"><img src="/images/worship-crowd.webp" alt="Sunday morning worship service" width="1280" height="960" loading="lazy" decoding="async" /></div>
+          <div class="gallery__item"><img src="/images/outreach-booth.webp" alt="Richland community outreach booth" width="1280" height="960" loading="lazy" decoding="async" /></div>
+          <div class="gallery__item"><img src="/images/testimony-night.webp" alt="Testimony night at Church 244" width="960" height="1280" loading="lazy" decoding="async" /></div>
+          <div class="gallery__item"><img src="/images/youth-outing.webp" alt="Church 244 Youth outing" width="960" height="1280" loading="lazy" decoding="async" /></div>
+          <div class="gallery__item"><img src="/images/easter-group.webp" alt="Easter Sunday church family" width="960" height="720" loading="lazy" decoding="async" /></div>
+          <div class="gallery__item"><img src="/images/worship-service.webp" alt="Spirit-led praise and worship" width="960" height="720" loading="lazy" decoding="async" /></div>
+          <div class="gallery__item"><img src="/images/family-event.webp" alt="Church 244 family fellowship event" width="1280" height="960" loading="lazy" decoding="async" /></div>
+          <!-- Duplicated for seamless infinite scroll -->
+          <div class="gallery__item" aria-hidden="true"><img src="/images/womens-ministry.webp" alt="" width="1280" height="960" loading="lazy" decoding="async" /></div>
+          <div class="gallery__item" aria-hidden="true"><img src="/images/worship-crowd.webp" alt="" width="1280" height="960" loading="lazy" decoding="async" /></div>
+          <div class="gallery__item" aria-hidden="true"><img src="/images/outreach-booth.webp" alt="" width="1280" height="960" loading="lazy" decoding="async" /></div>
+          <div class="gallery__item" aria-hidden="true"><img src="/images/testimony-night.webp" alt="" width="960" height="1280" loading="lazy" decoding="async" /></div>
+          <div class="gallery__item" aria-hidden="true"><img src="/images/youth-outing.webp" alt="" width="960" height="1280" loading="lazy" decoding="async" /></div>
+          <div class="gallery__item" aria-hidden="true"><img src="/images/easter-group.webp" alt="" width="960" height="720" loading="lazy" decoding="async" /></div>
+          <div class="gallery__item" aria-hidden="true"><img src="/images/worship-service.webp" alt="" width="960" height="720" loading="lazy" decoding="async" /></div>
+          <div class="gallery__item" aria-hidden="true"><img src="/images/family-event.webp" alt="" width="1280" height="960" loading="lazy" decoding="async" /></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- GIVING                                      -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="giving" id="giving">
+      <div class="container">
+        <div class="giving__layout">
+          <div class="giving__content reveal">
+            <span class="section-header__eyebrow">Support the Mission</span>
+            <h2 class="section-header__title">Generosity Changes <span class="text-accent">Everything</span></h2>
+            <p class="giving__desc">
+              Your generosity fuels the mission of Church 244 — from reaching our community to discipling the next generation.
+              Every gift makes a Kingdom impact.
+            </p>
+            <blockquote class="giving__verse">
+              "Each of you should give what you have decided in your heart to give, not reluctantly or under compulsion, for God loves a cheerful giver."
+              <cite>— 2 Corinthians 9:7</cite>
+            </blockquote>
+            <a href="https://church244.churchcenter.com/giving/to/general" target="_blank" rel="noopener noreferrer" class="btn btn--give btn--large">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              Give Online via Church Center
+            </a>
+          </div>
+          <div class="giving__visual reveal">
+            <div class="giving__card">
+              <div class="giving__card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="48" height="48">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                </svg>
+              </div>
+              <h3>Ways to Give</h3>
+              <ul class="giving__ways">
+                <li>
+                  <span class="giving__way-icon" aria-hidden="true">💻</span>
+                  <div><strong>Online</strong><p>Quick, secure giving through Church Center</p></div>
+                </li>
+                <li>
+                  <span class="giving__way-icon" aria-hidden="true">🏛️</span>
+                  <div><strong>In Person</strong><p>Drop your offering during any Sunday service</p></div>
+                </li>
+                <li>
+                  <span class="giving__way-icon" aria-hidden="true">📱</span>
+                  <div><strong>Church Center App</strong><p>Set up recurring gifts on the go</p></div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- CONTACT / PRAYER REQUEST                    -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="contact" id="contact">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-header__eyebrow">Get in Touch</span>
+          <h2 class="section-header__title">Contact &amp; <span class="text-accent">Prayer</span></h2>
+          <p class="section-header__subtitle">Have a question, planning your first Sunday visit, or need our prayer team to stand with you? Send a note directly to Pastor Josh and our team.</p>
+        </div>
+
+        <div class="contact__layout">
+          <form class="contact__form reveal" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contactForm" data-form-source="church244_home_contact">
+            <input type="hidden" name="form-name" value="contact" />
+            <input type="hidden" name="subject" value="Church 244 Website Message" />
+            <input type="hidden" name="page_source" value="home" />
+            <p class="contact__honeypot" style="display:none;"><label>Don't fill this out: <input name="bot-field" /></label></p>
+
+            <div class="contact__form-row">
+              <div class="contact__field">
+                <label for="contact-name" class="contact__label">Name</label>
+                <input type="text" id="contact-name" name="name" required autocomplete="name" class="contact__input" placeholder="Your full name" />
+              </div>
+              <div class="contact__field">
+                <label for="contact-email" class="contact__label">Email</label>
+                <input type="email" id="contact-email" name="email" required autocomplete="email" class="contact__input" placeholder="you@example.com" />
+              </div>
+            </div>
+
+            <div class="contact__form-row">
+              <div class="contact__field">
+                <label for="contact-phone" class="contact__label">Phone <span class="contact__optional">(optional)</span></label>
+                <input type="tel" id="contact-phone" name="phone" autocomplete="tel" class="contact__input" placeholder="(601) 555-0123" />
+              </div>
+              <div class="contact__field">
+                <label for="contact-type" class="contact__label">Request Type</label>
+                <select id="contact-type" name="type" required class="contact__input contact__select">
+                  <option value="" disabled selected>Choose one...</option>
+                  <option value="visitor">First-Time Visitor / Plan My Visit</option>
+                  <option value="prayer">Prayer Request</option>
+                  <option value="general">General Question</option>
+                  <option value="volunteer">I Want to Serve / Volunteer</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="contact__field">
+              <label for="contact-message" class="contact__label">Message</label>
+              <textarea id="contact-message" name="message" required class="contact__input contact__textarea" placeholder="How can we pray for you or help you get connected?" rows="5"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn--primary btn--large contact__submit" id="contactSubmit">
+              <span class="contact__submit-text">Send Message</span>
+              <span class="contact__submit-loading" style="display:none;">
+                <svg class="contact__spinner" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="30 70" /></svg>
+                Sending...
+              </span>
+            </button>
+          </form>
+
+          <div class="contact__success" id="contactSuccess" style="display:none;" role="status" aria-live="polite">
+            <div class="contact__success-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="48" height="48"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <h3>Message Received!</h3>
+            <p>Thank you for reaching out to Church 244. Pastor Josh and our team have received your note and will follow up soon.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- CALL TO ACTION BANNER                       -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="cta">
+      <div class="container">
+        <div class="cta__content reveal">
+          <h2>Join Us This Sunday</h2>
+          <p>There's a seat with your name on it at 129 Center St in Richland. Come experience what God is doing at Church 244.</p>
+          <div class="cta__actions">
+            <a href="tel:+16013171482" class="btn btn--primary btn--large">Call Us: (601) 317-1482</a>
+            <a href="/prayer" class="btn btn--ghost btn--large">Submit a Prayer Request</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <!-- ═══════════════════════════════════════════ -->
   <!-- FOOTER                                      -->
@@ -898,58 +957,58 @@
       <div class="footer__grid">
         <div class="footer__brand">
           <div class="footer__logo">
-            <img src="/images/church244-logo-v2.png" alt="Church 244 - Kingdom Minded" class="footer__logo-img" />
+            <img src="/images/church244-logo-v2.webp" alt="Church 244 - Kingdom Minded" width="138" height="55" loading="lazy" decoding="async" class="footer__logo-img" />
           </div>
-          <p class="footer__tagline">Kingdom Minded · A Christ-centered, Spirit-filled family in Richland, Mississippi.</p>
+          <p class="footer__tagline">Kingdom Minded · A Christ-centered, Spirit-filled church family in Richland, Mississippi.</p>
           <div class="footer__social">
-            <a href="https://www.facebook.com/p/Church-244-61565615548732/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            <a href="https://www.facebook.com/p/Church-244-61565615548732/" target="_blank" rel="noopener noreferrer" aria-label="Church 244 on Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
             </a>
-            <a href="https://youtube.com/@church244" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            <a href="https://youtube.com/@church244" target="_blank" rel="noopener noreferrer" aria-label="Church 244 on YouTube">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
             </a>
-            <a href="https://www.tiktok.com/tag/church244" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.87a8.29 8.29 0 0 0 4.76 1.52V6.94a4.84 4.84 0 0 1-1-.25z"/></svg>
+            <a href="https://www.tiktok.com/tag/church244" target="_blank" rel="noopener noreferrer" aria-label="Church 244 on TikTok">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.87a8.29 8.29 0 0 0 4.76 1.52V6.94a4.84 4.84 0 0 1-1-.25z"/></svg>
             </a>
           </div>
         </div>
-        
+
         <div class="footer__col">
-          <h4>Service Times</h4>
+          <h3>Service Times</h3>
           <ul>
-            <li>Sunday: 10:00 AM</li>
-            <li>Wednesday: 6:30 PM</li>
+            <li>Sunday Worship: 10:00 AM</li>
+            <li>Wednesday Bible Study: 6:30 PM</li>
             <li>Youth Thursday: 6:30 PM</li>
           </ul>
         </div>
-        
+
         <div class="footer__col">
-          <h4>Quick Links</h4>
+          <h3>Quick Links</h3>
           <ul>
-            <li><a href="#about">About Us</a></li>
-            <li><a href="#sermons">Sermons</a></li>
-            <li><a href="#events">Events</a></li>
-            <li><a href="#pastor">Our Pastor</a></li>
-            <li><a href="#ministries">Ministries</a></li>
-            <li><a href="#giving">Give</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="#visit">Visit Us</a></li>
+            <li><a href="/plan-your-visit">Plan Your Visit</a></li>
+            <li><a href="/ministries">Ministries &amp; Youth</a></li>
+            <li><a href="/prayer">Prayer Request</a></li>
+            <li><a href="#sermons">Watch Sermons</a></li>
+            <li><a href="#events">Upcoming Events</a></li>
+            <li><a href="#pastor">Our Leadership</a></li>
+            <li><a href="https://church244.churchcenter.com/giving/to/general" target="_blank" rel="noopener noreferrer">Online Giving</a></li>
           </ul>
         </div>
-        
+
         <div class="footer__col">
-          <h4>Contact</h4>
+          <h3>Contact</h3>
           <ul>
             <li>129 Center St, Suite F</li>
             <li>Richland, MS 39218</li>
             <li><a href="tel:+16013171482">(601) 317-1482</a></li>
+            <li><a href="https://www.google.com/maps/place/Church+244/@32.2200422,-90.1572158,17z" target="_blank" rel="noopener noreferrer">Get Directions →</a></li>
           </ul>
         </div>
       </div>
-      
+
       <div class="footer__bottom">
         <p>&copy; 2026 Church 244. All rights reserved.</p>
-        <p class="footer__credit">Made with ❤️ for the Kingdom · Designed & Engineered by <a href="https://powerdigitalmedia.org" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline; text-underline-offset: 3px;">Power Digital Media</a></p>
+        <p class="footer__credit">Made with ❤️ for the Kingdom · Designed &amp; Engineered by <a href="https://powerdigitalmedia.org" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline; text-underline-offset: 3px;">Power Digital Media</a></p>
       </div>
     </div>
   </footer>
